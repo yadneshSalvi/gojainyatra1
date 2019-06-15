@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{% url 'shala_info' shala.name_without_space %}" style="color:black;">{{shala.name_with_space}}</a></li>
+      <li class="breadcrumb-item active">Write Vlog</li>
+    </ol>
+  </div>
+  <div class="d-flex justify-content-center" id="myline">
+    <h2>{{shala.name_with_space}}</h2>
+  </div>
+  <div class="d-flex justify-content-center">{{shala.description}}</div>
+  
+  <div class="container">
+    <form method="post" novalidate style="padding-top:30px;padding-bottom:30px;">
+      {% csrf_token %}
+      {{form|crispy}}
+      <button type="submit" class="btn btn-success" style="margin-top:20px;">Post</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+    var simplemde = new SimpleMDE();
+</script>
+{% endblock %}

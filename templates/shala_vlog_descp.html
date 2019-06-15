@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'shala_info' shala.name_without_space %}" style="color:black;">{{shala.name_with_space}}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'shala_vlogs_list' shala.name_without_space %}" style="color:black;">Vlogs List</a></li>
+      <li class="breadcrumb-item active">Vlog by {{vlog.writer}}</li>
+    </ol>
+</div>
+<div class="d-flex justify-content-center" id="myline">
+    <h4>Vlog on {{shala.name_with_space}}</h4>
+</div>
+<div style="font-family:'Oxygen';float:right;padding-right:10px;">by {{vlog.writer}} at {{vlog.last_updated}}</div>
+<div class="container" style="padding-top:30px;padding-bottom:30px;font-family:'Quicksand';">
+    {{vlog.get_blog_as_markdown}}
+</div>
+<div class="d-flex flex-wrap justify-content-center">
+    {% if vlog.image1 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">        
+                <img src="{{vlog.image1.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+        </div>
+    {% endif %}
+    {% if vlog.image2 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">
+                <img src="{{vlog.image2.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+        </div>
+    {% endif %}
+</div>
+<div class="d-flex flex-wrap justify-content-center">
+    {% if vlog.image3 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">        
+                <img src="{{vlog.image3.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+        </div>
+    {% endif %}
+    {% if vlog.image4 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">
+                <img src="{{vlog.image4.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+        </div>
+    {% endif %}
+</div>
+<div class="d-flex flex-wrap justify-content-center">
+    {% if vlog.image5 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">        
+            <img src="{{vlog.image5.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+        </div>
+    {% endif %}
+    {% if vlog.image6 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">
+            <img src="{{vlog.image6.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+        </div>
+    {% endif %}
+</div>
+<div class="d-flex flex-wrap justify-content-center">
+    {% if vlog.image7 %}
+        <div class="col-xs-11 col-lg-5 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">
+            <img src="{{vlog.image7.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+         </div>
+    {% endif %}
+</div>
+{% if vlog.writer == user %}
+    <div class="container">
+        <a href="{% url 'edit_vlog' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer vlog.pk %}" 
+        class="btn btn-primary" role="button" style="margin-bottom:30px;">Edit</a>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript" src="{% static 'image.js' %}"></script>
+
+{% endblock %}

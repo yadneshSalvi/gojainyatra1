@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'user_bookings' %}" style="color:black;"></a>My bookings</li>
+      <li class="breadcrumb-item active">{{booking.dharamshala.name_with_space}}</li>
+    </ol>
+</div>
+
+<div class="container" style="padding-top:10px;font-family:'Quicksand';">
+    <h3>You have booked {{booking.dharamshala.name_with_space}} details are as follows</h3>
+    <span>Checkin Date : {{booking.checkin_date}}</span><br>
+    <span>Checkout Date: {{booking.checkout_date}}</span><br>
+    <span>Booked on Date : {{booking.booked_at}}</span><br>
+    <span>Dharamshala name : {{booking.dharamshala.name_with_space}}</span> <br>
+    <span>Dharamshala city : {{booking.dharamshala.city}}</span><br>
+    <span>Dharamshala state : {{booking.dharamshala.state}}</span><br>
+    <span>Booked at : {{booking.booked_at}}</span><br>
+    {% if booking.room_type != 'select' %}
+        <span>Room Type = {{booking.room_type}}</span><br>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'shala_info' shala.name_without_space %}" style="color:black;">{{shala.name_with_space}}</a></li>
+      <li class="breadcrumb-item active">Vlogs List</li>
+    </ol>
+</div>
+
+<div class="container" style="padding-top:10px;">
+    <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Vlog written by</th>
+            <th>Written on Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for vlog in shala.get_all_vlogs %}
+            <tr>
+                <td>
+                    <a href="{% url 'shala_vlog_descp' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer %}" style="color:black;">
+                        {{vlog.writer}}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'shala_vlog_descp' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer %}" style="color:black;">
+                        {{vlog.last_updated}}
+                    </a>
+                </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript" src="{% static 'image.js' %}"></script>
+{% endblock %}

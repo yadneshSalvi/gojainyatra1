@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top:10px;">
+        <table class="table">
+            <thead class="thead-inverse">
+              <tr>
+                <th>Dharamshala</th>
+                <th>Number of Vlogs</th>
+                <th>Most Recent Vlog</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for shala in shalas %}
+                <tr>
+                    <td>
+                        <a href="{% url 'shala_info' shala.name_without_space %}" style="color:black;">
+                            {{shala.name_with_space}}
+                            <small class="text-muted d-block">{{shala.city_or_location}}</small>
+                        </a>
+                    </td>
+                    <td class="align-middle">
+                        <a href="{% url 'shala_vlogs_list' shala.name_without_space %}" style="color:black;">
+                            {{shala.vlogs.count}}
+                        </a>
+                    </td>
+                    <td>
+                        {% if shala.get_last_vlog %}
+                                <small>
+                                    <a href="{% url 'shala_vlogs_list' shala.name_without_space %}" style="color:black;">
+                                        By {{shala.get_last_vlog.writer}} at {{shala.get_last_vlog.last_updated}}
+                                    </a>
+                                </small>
+                        {% else %}
+                                <small>
+                                    No vlogs yet.
+                                </small>
+                        {% endif %}
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

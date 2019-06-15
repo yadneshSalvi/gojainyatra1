@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top:10px;">
+        <p>List of all the dharamshalas present on our website is as follows.</p>
+        <table class="table">
+            <thead class="thead-inverse">
+              <tr>
+                <th>Dharamshala</th>
+                <th>City</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for shala in shalas %}
+                <tr>
+                    <td>
+                        <a href="{% url 'shala_info' shala.name_without_space %}" style="color:black;">
+                            {{shala.name_with_space}}
+                        </a>
+                    </td>
+                    <td >{{shala.city_or_location}}</td>
+                    <td >{{shala.state}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

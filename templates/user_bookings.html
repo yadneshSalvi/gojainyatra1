@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
+      <li class="breadcrumb-item active">My bookings</li>
+      
+    </ol>
+</div>
+
+<div class="container" style="padding-top:10px;">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Booking for Dharamshala</th>
+            <th>Booking Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for booking in bookings %}
+            <tr>
+                <td>
+                    <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day booking.booked_at.hour booking.booked_at.minute booking.booked_at.second%}" 
+                    style="color:black;">
+                        {{booking.dharamshala.name_with_space}}
+                        <small class="text-muted d-block">{{booking.dharamshala.city_or_location}}</small>
+                    </a>
+                </td>
+                <td class="align-middle">
+                    <a href="" style="color:black;">
+                        {{booking.booked_at}}
+                    </a>
+                </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

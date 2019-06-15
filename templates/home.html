@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center" id="myline">
+        <h2>Book Jain Dharamshala Online across India</h2>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="row"> 
+            <form method="GET" action="{% url 'search' %}">
+                <div class="row">
+                    <div class="col-xs-9 col-md-10">
+                        <input class='form-control' name="q" value="{{request.GET.q}}" placeholder="Type name/city/state..." style="width:100%;">
+                    </div>
+                    <div class="col-xs-1 col-md-1">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- form for search bar goes here -->
+    
+    <div class="d-flex flex-wrap justify-content-center">
+        {% for shala in shalas %}
+            <div class="col-xs-11 col-lg-3 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">
+                {% if shala.image1 %}
+                    <a href="{% url 'shala_info' shala.name_without_space %}">
+                        <img src="{{shala.image1.url}}" alt="Image of DharamShala" width="250px" height="180px" style="padding-top:25px;position: relative;padding-bottom: 5px;">
+                    </a>
+                {% endif %}
+                <br>
+                <a href="{% url 'shala_info' shala.name_without_space %}">
+                    <p>
+                        <span id="myspan1">
+                            {{shala.name_with_space}}
+                        </span>
+                        <br>
+                        <span id="myspan2">  
+                            {% if shala.rooms_starting_at %}
+                                Rooms starting at ₹{{shala.rooms_starting_at}}
+                            {% else %}
+                                Rooms at affordable price
+                            {% endif %}
+                        </span>
+                    </p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+<div class="d-flex justify-content-center">
+    {% if shalas.has_other_pages %}
+        <nav aria-label="Shalas pagination" class="mb-4">   
+            <ul class="pagination">
+    {% if shalas.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ shalas.previous_page_number }}{% if query %}&q={{query}}{% endif %}">
+                    Previous</a>
+            </li>
+    {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+    {% endif %}
+
+    {% for page_num in shalas.paginator.page_range %}
+        {% if shalas.number == page_num %}
+            <li class="page-item active">
+                <span class="page-link">
+                    {{ page_num }}
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+        {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_num }}{% if query %}&q={{query}}{% endif %}">{{ page_num }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+
+    {% if shalas.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ shalas.next_page_number }}{% if query %}&q={{query}}{% endif %}">
+                    Next</a>
+            </li>
+    {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Next</span>
+            </li>
+    {% endif %}
+            </ul>
+        </nav>
+</div>
+    {% endif %}
+
+{% endblock %}

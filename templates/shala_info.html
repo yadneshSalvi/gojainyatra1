@@ -1,0 +1,431 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block stylesheet %}
+   <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
+{% endblock %}
+
+{% block navbar_add %}
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_dharamshala' %}">Dharamshalas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'vlogs' %}">Vlogs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
+      <li class="breadcrumb-item active">{{shala.name_with_space}}</li>
+    </ol>
+  </div>
+  <div class="d-flex justify-content-center" id="myline">
+    <h2>{{shala.name_with_space}}</h2>
+  </div>
+  <div class="d-flex justify-content-center">{{shala.description}}</div>
+  <div class="d-flex justify-content-center" style="padding-top:10px;padding-bottom:10px">
+    {% if shala.image1 %}
+      <button class="mybutton"onclick="plusDivs(-1)">&#10094;</button>    
+    {% endif %}
+    {% if shala.image1 %}
+      <img class="mySlides" src="{{shala.image1.url}}" alt="Image of DharamShala" width="60%" height="40%">
+    {% endif %}
+    {% if shala.image2 %}
+      <img class="mySlides" src="{{shala.image2.url}}" alt="Image of DharamShala" width="60%" height="40%">
+    {% endif %}
+    {% if shala.image3 %}
+      <img class="mySlides" src="{{shala.image3.url}}" alt="Image of DharamShala" width="60%" height="40%">
+    {% endif %}
+    {% if shala.image4 %}
+      <img class="mySlides" src="{{shala.image4.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image5 %}
+      <img class="mySlides" src="{{shala.image5.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image6 %}
+      <img class="mySlides" src="{{shala.image6.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image7 %}
+      <img class="mySlides" src="{{shala.image7.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image8 %}
+      <img class="mySlides" src="{{shala.image8.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image9 %}
+      <img class="mySlides" src="{{shala.image9.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image10 %}
+      <img class="mySlides" src="{{shala.image10.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image11 %}
+      <img class="mySlides" src="{{shala.image11.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image12 %}
+      <img class="mySlides" src="{{shala.image12.url}}" alt="Image of DharamShala" width="600px" height="400px">
+    {% endif %}
+    {% if shala.image1 %}
+      <button class="mybutton" onclick="plusDivs(1)">&#10095;</button>
+    {% endif %}
+  </div>
+  <div class="mydiv">  
+    <button class="accordion d-flex justify-content-center">ROOMS</button>
+    <div class="panel">
+      <p>Rooms in this Dharamshala:</p>
+      <ul>
+        {% if shala.rooms_type1 %}
+          <li>
+            {{shala.rooms_type1}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type2 %}
+          <li>
+            {{shala.rooms_type2}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type3 %}
+          <li>
+            {{shala.rooms_type3}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type4 %}
+          <li>
+            {{shala.rooms_type4}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type5 %}
+          <li>
+            {{shala.rooms_type5}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type6 %}
+          <li>
+            {{shala.rooms_type6}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type7 %}
+          <li>
+            {{shala.rooms_type7}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type8 %}
+          <li>
+            {{shala.rooms_type8}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type9 %}
+          <li>
+            {{shala.rooms_type9}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type10 %}
+          <li>
+            {{shala.rooms_type10}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type11 %}
+          <li>
+            {{shala.rooms_type11}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type12 %}
+          <li>
+            {{shala.rooms_type12}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type13 %}
+          <li>
+            {{shala.rooms_type13}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type14 %}
+          <li>
+            {{shala.rooms_type14}}
+          </li>
+        {% endif %}
+        {% if shala.rooms_type15 %}
+          <li>
+            {{shala.rooms_type15}}
+          </li>
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+      
+    <button class="accordion d-flex justify-content-center">RULES</button>
+    <div class="panel">
+      <p>Rules to be followed:</p>
+      <ul>
+        {% if shala.rule_1 %}
+          <li>
+            {{shala.rule_1}}
+          </li>
+        {% endif %}
+        {% if shala.rule_2 %}
+          <li>
+            {{shala.rule_2}}
+          </li>
+        {% endif %}
+        {% if shala.rule_3 %}
+          <li>
+            {{shala.rule_3}}
+          </li>
+        {% endif %}
+        {% if shala.rule_4 %}
+          <li>
+            {{shala.rule_4}}
+          </li>
+        {% endif %}
+        {% if shala.rule_5 %}
+          <li>
+            {{shala.rule_5}}
+          </li>
+        {% endif %}
+        {% if shala.rule_6 %}
+          <li>
+            {{shala.rule_6}}
+          </li>
+        {% endif %}
+        {% if shala.rule_7 %}
+          <li>
+            {{shala.rule_7}}
+          </li>
+        {% endif %}
+        {% if shala.rule_8 %}
+          <li>
+            {{shala.rule_8}}
+          </li>
+        {% endif %}
+        {% if shala.rule_9 %}
+          <li>
+            {{shala.rule_9}}
+          </li>
+        {% endif %}
+        {% if shala.rule_10 %}
+          <li>
+            {{shala.rule_10}}
+          </li>
+        {% endif %}
+        {% if shala.rule_11 %}
+          <li>
+            {{shala.rule_11}}
+          </li>
+        {% endif %}
+        {% if shala.rule_12 %}
+          <li>
+            {{shala.rule_12}}
+          </li>
+        {% endif %}
+        {% if shala.rule_13 %}
+          <li>
+            {{shala.rule_13}}
+          </li>
+        {% endif %}
+        {% if shala.rule_14 %}
+          <li>
+            {{shala.rule_14}}
+          </li>
+        {% endif %}
+        {% if shala.rule_15 %}
+          <li>
+            {{shala.rule_15}}
+          </li>
+        {% endif %}
+      </ul>  
+        
+    </div>
+      
+    <button class="accordion d-flex justify-content-center">FACILITIES</button>
+    <div class="panel">
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_ac.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Air conditioner</span>
+          {% if shala.air_conditioner %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+             <img src = "{% static 'facilities/icon_wc.png' %}" alt="logo" style="padding-right:10px">
+            <span style="padding-right:10px">AttachedWC</span>
+          {% if shala.attached_WC %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_indian.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Attached Indian Toilet</span>
+          {% if shala.attached_Indian_toilet %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+            <img src = "{% static 'facilities/icon_wifi.png' %}" alt="logo" style="padding-right:10px">
+            <span style="padding-right:10px">Wifi</span>
+          {% if shala.Wifi %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_driver.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Driver Accomodation</span>
+          {% if shala.Driver_Accomodation %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_generator.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Generator</span>
+          {% if shala.Generator %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_ro_water.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">RO Water</span>
+          {% if shala.RO_water %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_hot_water.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Hot Water</span>
+          {% if shala.Hot_water %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_locker.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Locker</span>
+          {% if shala.Locker %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_parking.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Parking</span>
+          {% if shala.Parking %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_lift.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Lift</span>
+          {% if shala.Lift %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_bed.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Bed</span>
+          {% if shala.Bed %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-md-5" style="margin-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <img src = "{% static 'facilities/icon_water_cooler.png' %}" alt="logo" style="padding-right:10px">
+          <span style="padding-right:10px">Water Cooler</span>
+          {% if shala.Water_cooler %}
+            <img src = "{% static 'facilities/icon_check.png' %}" alt="logo">
+          {% else %}
+            <img src = "{% static 'facilities/icon_cross.png' %}" alt="logo">
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-5" style="margin-bottom:10px;border-bottom: 1px solid rgba(0,0,0,0.5);">
+          <span style="padding-right:10px">That's it!</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="accordion d-flex justify-content-center">BHOJANSHALA</button>
+    <div class="panel">
+      <p>Bhojanshala Timings and rules:</p>
+      <ul>
+        {% if shala.bhojanshla_rule_1 %}
+          <li>
+            {{shala.bhojanshla_rule_1}}
+          </li>
+        {% endif %}
+        {% if shala.bhojanshla_rule_2 %}
+          <li>
+            {{shala.bhojanshla_rule_2}}
+          </li>
+        {% endif %}
+        {% if shala.bhojanshla_rule_3 %}
+          <li>
+            {{shala.bhojanshla_rule_3}}
+          </li>
+        {% endif %}
+        {% if shala.bhojanshla_rule_4 %}
+          <li>
+            {{shala.bhojanshla_rule_4}}
+          </li>
+        {% endif %}
+        {% if shala.bhojanshla_rule_5 %}
+          <li>
+            {{shala.bhojanshla_rule_5}}
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin:auto;">
+    <div>
+      <button type="button" class="btn btn-lg" id="book-button"><a href="{% url 'booking' shala.name_without_space %}" style="color:black;"> Request Provisional Booking </a></button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-lg" id="button-vlog"><a href="{% url 'shala_vlogs_list' shala.name_without_space %}" style="color:black;">Read Vlogs</a></button>
+      
+      <button type="button" class="btn btn-lg" id="button-vlog"><a href="{% url 'write_vlog' shala.name_without_space %}" style="color:black;">Write a Vlog</a></button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript" src="{% static 'image.js' %}"></script>
+{% endblock %}
