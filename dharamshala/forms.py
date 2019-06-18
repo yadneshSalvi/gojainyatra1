@@ -14,6 +14,7 @@ class NewBookingForm(forms.ModelForm):
         empty_label=("Choose Year", "Choose Month", "Choose Day"),
         ),
     )
+    phone_no = forms.IntegerField(max_length = 10, min_length = 10)
     class Meta:
         model = Booking
         fields = ['First_Name','Last_Name','email_id','phone_no','checkin_date','checkout_date','room_type']
