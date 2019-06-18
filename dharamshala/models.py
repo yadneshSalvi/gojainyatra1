@@ -8,10 +8,9 @@ from markdown import markdown
 # Create your models here.
 
 class Shala(models.Model):
-    name_without_space = models.CharField(max_length = 30, unique = True,default='abc')
-    #in final model remove the default in above field
+    name_without_space = models.CharField(max_length = 30, unique = True)
     name_with_space = models.CharField(max_length = 30, unique = True)
-    rooms_starting_at = models.CharField(max_length=100)
+    rooms_starting_at = models.IntegerField(max_length=5)
     description = models.CharField(max_length = 400)
     city_or_location = models.CharField(max_length = 100)
     state = models.CharField(max_length = 100)
@@ -98,8 +97,7 @@ class Shala(models.Model):
         return vlog.objects.filter(dharamshala=self).order_by('-last_updated')
 
 class vlog(models.Model):
-    blog = models.TextField(max_length=5000,default='default blog')
-    # remove the default above in final model
+    blog = models.TextField(max_length=5000)
     image1 = models.ImageField(upload_to='images/',blank=True,null=True)
     image2 = models.ImageField(upload_to='images/',blank=True,null=True)
     image3 = models.ImageField(upload_to='images/',blank=True,null=True)
@@ -122,13 +120,13 @@ class Booking(models.Model):
     First_Name = models.CharField(max_length=100)
     Last_Name = models.CharField(max_length=100)
     email_id = models.EmailField(max_length=100)
-    phone_no = models.CharField(max_length=20)
+    phone_no = models.IntegerField(max_length=10)
     checkin_date = models.DateField(null=True,blank=True)
     checkout_date = models.DateField(null=True,blank=True)
     room_type = models.CharField(max_length=100,blank=True,null=True,default="select")
     dharamshala = models.ForeignKey(Shala,related_name='bookings',on_delete=models.CASCADE)
     booked_by = models.ForeignKey(User,related_name='bookings',on_delete=models.CASCADE,null=True,blank=True)
-    booked_at = models.DateTimeField(default=datetime.now)
+    booked_at = models.DateTimeField(auto_now_add = True)
     #in final model change above field to auto_now_add = True
     def __str__(self):
         return self.booked_by.username
