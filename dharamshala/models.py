@@ -10,7 +10,7 @@ from markdown import markdown
 class Shala(models.Model):
     name_without_space = models.CharField(max_length = 30, unique = True)
     name_with_space = models.CharField(max_length = 30, unique = True)
-    rooms_starting_at = models.IntegerField(max_length=5)
+    rooms_starting_at = models.IntegerField()
     description = models.CharField(max_length = 400)
     city_or_location = models.CharField(max_length = 100)
     state = models.CharField(max_length = 100)
@@ -120,7 +120,7 @@ class Booking(models.Model):
     First_Name = models.CharField(max_length=100)
     Last_Name = models.CharField(max_length=100)
     email_id = models.EmailField(max_length=100)
-    phone_no = models.IntegerField(max_length=10)
+    phone_no = models.IntegerField()
     checkin_date = models.DateField(null=True,blank=True)
     checkout_date = models.DateField(null=True,blank=True)
     room_type = models.CharField(max_length=100,blank=True,null=True,default="select")
