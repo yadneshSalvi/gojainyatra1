@@ -120,7 +120,7 @@ class Booking(models.Model):
     First_Name = models.CharField(max_length=100)
     Last_Name = models.CharField(max_length=100)
     email_id = models.EmailField(max_length=100)
-    phone_no = models.IntegerField()
+    phone_no = models.CharField(max_length=10)
     checkin_date = models.DateField(null=True,blank=True)
     checkout_date = models.DateField(null=True,blank=True)
     room_type = models.CharField(max_length=100,blank=True,null=True,default="select")
