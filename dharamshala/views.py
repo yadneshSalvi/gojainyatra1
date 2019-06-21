@@ -132,11 +132,10 @@ def booking(request,slug):
             mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
             to_email = booking.cleaned_data.get('email_id')
             email = EmailMessage(
-                subject=subject,
-                body=mail_body,
-                from_email='support@gojainyatra.com',
-                to=[to_email,],
-                headers={'Content-Type': 'text/plain'},
+                subject,
+                mail_body,
+                'support@gojainyatra.com',
+                to=[to_email,]
             )
             email.send()
             messages.success(request, 'You have requuested for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.')
