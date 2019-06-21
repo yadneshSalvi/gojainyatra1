@@ -139,10 +139,10 @@ body {
   }
   .footer {
       height: 100px;
-      width:100%;
       position: relative;
       background: #EDEFF1;
-}
+      width:100%;
+  }
   .footer p {
       margin: 0;
   }
