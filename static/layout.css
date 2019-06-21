@@ -1,3 +1,26 @@
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+}
+
+.push {
+  height: 60px;
+}
+
+footer {
+  height: 60px;
+  width:100%;
+  padding: 15px 0;
+  background-color: #e9ecef;
+  position: relative;
+}
 #myline{
     padding-top: 15px;
     font-family: "Cinzel";
