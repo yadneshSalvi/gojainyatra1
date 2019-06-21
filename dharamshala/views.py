@@ -12,7 +12,7 @@ from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 # Create your views here.
 
@@ -131,7 +131,14 @@ def booking(request,slug):
             subject = '[GoJainYatra] Received Booking request.'
             mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
             to_email = booking.cleaned_data.get('email_id')
-            send_mail(subject,mail_body,'support@gojainyatra.com',[to_email,])
+            email = EmailMessage(
+                subject=subject,
+                body=mail_body,
+                from_email='support@gojainyatra.com',
+                to=[to_email,],
+                headers={'Content-Type': 'text/plain'},
+            )
+            email.send()
             messages.success(request, 'You have requuested for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.')
             return redirect ('user_bookings')
     else:
