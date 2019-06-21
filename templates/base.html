@@ -24,8 +24,8 @@
                 <img src = "{% static 'images/logo.png' %}" alt="logo">
             </a>
         </nav>
-        <!--<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #d73c2a;">-->
-        <nav class="navbar navbar-expand-sm bg-light navbar-light">    
+        <!--<nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color: #d73c2a;">-->
+        <nav class="navbar navbar-expand-sm bg-light navbar-light sticky-top">    
             <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,10 +60,9 @@
         </nav>
         {% block content %} {% endblock %}
         <div class="push"></div>
-      </div>
-        
+      </div>  
         <footer>
-            <div class="container-fluid bg-primary py-3">
+          <div class="container-fluid bg-primary py-3">
            <div class="container">
              <div class="row">
                <div class="col-md-7">
@@ -83,7 +82,7 @@
                <div class="col-md-5">
                  <div class="d-inline-block">
                    <div class="bg-circle-outline d-inline-block" style="background-color:#3b5998">
-                     <a href="https://www.facebook.com/GoJainYatra/"><i class="fa fa-2x fa-fw fa-facebook text-white"></i>
+                     <a href="https://www.facebook.com/"><i class="fa fa-2x fa-fw fa-facebook text-white"></i>
                </a>
                    </div>
                    <div class="bg-circle-outline d-inline-block" style="background-color:#4099FF">
@@ -103,9 +102,8 @@
                </div>
              </div>
            </div>
-           </div>
+          </div>
        </footer>
-      
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         
