@@ -129,7 +129,7 @@ class Booking(models.Model):
     booked_at = models.DateTimeField(auto_now_add = True)
     #in final model change above field to auto_now_add = True
     def __str__(self):
-        return self.booked_by.username
+        return self.First_Name
 
     #def get_all_bookings(self):
     #    return bookings.objects.order_by('-last_updated')
