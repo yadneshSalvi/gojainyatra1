@@ -88,10 +88,10 @@ def shala_info(request,slug):
     shala = get_object_or_404(Shala,name_without_space=slug)
     return render(request,'shala_info.html',{'shala':shala})
 
-def shala_vlog_descp(request,slug,year,month,day,hour,minute,second,username):
+def shala_vlog_descp(request,slug,year,month,day,hour,minute,username):
     shala = get_object_or_404(Shala,name_without_space=slug)
     my_vlog = get_object_or_404(vlog, dharamshala__name_without_space=slug, last_updated__year=year,last_updated__month=month,last_updated__day=day,
-    last_updated__hour=hour,last_updated__minute=minute,last_updated__second=second,writer__username=username)
+    last_updated__hour=hour,last_updated__minute=minute,writer__username=username)
     return render(request,'shala_vlog_descp.html',{'shala':shala,'vlog':my_vlog})
 
 def shala_vlogs_list(request,slug):
@@ -165,7 +165,7 @@ def user_vlogs(request):
     return render(request,'user_vlogs.html',{'vlogs':vlogs})
 
 @login_required
-def user_bookings_descp(request,username,year,month,day,hour,minute,second):
+def user_bookings_descp(request,username,year,month,day,hour,minute,):
     booking = get_object_or_404(Booking,booked_by__username=username,booked_at__year=year,booked_at__month=month,booked_at__day=day,
-    booked_at__hour=hour,booked_at__minute=minute,booked_at__second=second)
+    booked_at__hour=hour,booked_at__minute=minute)
     return render(request,'user_bookings_descp.html',{'booking':booking})
