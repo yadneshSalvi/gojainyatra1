@@ -48,7 +48,7 @@
           {% for booking in bookings %}
             <tr>
                 <td>
-                    <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day booking.booked_at.hour booking.booked_at.minute booking.booked_at.second%}" 
+                    <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day booking.booked_at.hour booking.booked_at.minute%}" 
                     style="color:black;">
                         {{booking.dharamshala.name_with_space}}
                         <small class="text-muted d-block">{{booking.dharamshala.city_or_location}}</small>
