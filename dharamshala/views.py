@@ -21,6 +21,8 @@ def search (request):
     if query:
         queryset = Shala.objects.filter(Q(name_without_space__icontains=query) | Q(name_with_space__icontains=query)
         | Q(city_or_location__icontains=query) | Q(state__icontains=query) | Q(description__icontains=query))
+        if not queryset:
+            messages.error(request, 'Sorry no results found.')
     else:
         queryset = Shala.objects.all()
 
