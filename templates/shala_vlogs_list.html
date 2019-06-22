@@ -43,12 +43,12 @@
           {% for vlog in shala.get_all_vlogs %}
             <tr>
                 <td>
-                    <a href="{% url 'shala_vlog_descp' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer %}" style="color:black;">
+                    <a href="{% url 'shala_vlog_descp' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.writer %}" style="color:black;">
                         {{vlog.writer}}
                     </a>
                 </td>
                 <td>
-                    <a href="{% url 'shala_vlog_descp' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer %}" style="color:black;">
+                    <a href="{% url 'shala_vlog_descp' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.writer %}" style="color:black;">
                         {{vlog.last_updated}}
                     </a>
                 </td>
