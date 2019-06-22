@@ -131,10 +131,18 @@ def booking(request,slug):
                 booking.booked_by = request.user
             booking.save()
             first_name = form.cleaned_data.get('First_Name')
+            last_name = form.cleaned_data.get('Last_Name')
+            phone_no = form.cleaned_data.get('phone_no')
+            dharamshala = shala
+            checkin_date = form.cleaned_data.get('checkin_date')
+            checkout_date = form.cleaned_data.get('checkout_date')
+            room_type = form.cleaned_data.get('room_type')
             subject = 'Received Booking request.'
             mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
             to_email = form.cleaned_data.get('email_id')
             send_mail(subject,mail_body,'support@gojainyatra.com',[to_email,],fail_silently=False)
+            dhairya_mail = 'Name : '+str(first_name)+' '+str(last_name)+'. Phone no. : '+str(phone_no)+'. Dharamshala : '+str(dharamshala)+'. Checkin date: '+str(checkin_date)+' Checkout date: '+str(checkout_date)+'. Room type : '+str(room_type)
+            send_mail(subject,dhairya_mail,'support@gojainyatra.com',['rasilabengangar51@gmail.com','support@gojainyatra.com',],fail_silently=False)
             messages.success(request, 'You have requested for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.')
             if not request.user.is_authenticated:
                 return redirect('home')
