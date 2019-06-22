@@ -44,14 +44,12 @@
         </div>
     </div>
     <!-- form for search bar goes here -->
-    {% if messages %}
-        <div class="container" style="padding-top:10px;"></div>    
-            {% for message in messages %}
-                <div class="d-flex flex-wrap justify-content-center alert alert-danger" role="alert">{{ message }}</div>
-            {% endfor %}
-        </div>
-    {% endif %}
+
+    {% for message in messages %}
+        <div class="d-flex flex-wrap justify-content-center alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert" style="margin-top:10px;">{{ message }}</div>
+    {% endfor %}
     <div class="d-flex flex-wrap justify-content-center">
+        
         {% for shala in shalas %}
             <div class="col-xs-11 col-lg-3 col-md-offset-1 justify-content-center myclass" style="text-align:center; border: 2px solid #b1c9e0; border-radius: 10px;margin: 10px 10px;"onmouseover="this.style.background='#e0c2b1';" onmouseout="this.style.background='white';">
                 {% if shala.image1 %}
