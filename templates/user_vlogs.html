@@ -41,7 +41,7 @@
           {% for vlog in vlogs %}
             <tr>
                 <td>
-                    <a href="{% url 'shala_vlog_descp' vlog.dharamshala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer%}" 
+                    <a href="{% url 'shala_vlog_descp' vlog.dharamshala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.writer%}" 
                     style="color:black;">
                         {{vlog.dharamshala.name_with_space}}
                         <small class="text-muted d-block">{{vlog.dharamshala.city_or_location}}</small>
