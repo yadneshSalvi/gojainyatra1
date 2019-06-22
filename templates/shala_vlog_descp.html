@@ -83,7 +83,7 @@
 </div>
 {% if vlog.writer == user %}
     <div class="container">
-        <a href="{% url 'edit_vlog' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer vlog.pk %}" 
+        <a href="{% url 'edit_vlog' shala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.writer vlog.pk %}" 
         class="btn btn-primary" role="button" style="margin-bottom:30px;">Edit</a>
     </div>
 {% endif %}

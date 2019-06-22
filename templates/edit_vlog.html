@@ -28,7 +28,7 @@
     <ol class="breadcrumb my-4">
       <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
       <li class="breadcrumb-item"><a href="{% url 'shala_info' vlog.dharamshala.name_without_space %}" style="color:black;">{{vlog.dharamshala.name_with_space}}</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'shala_vlog_descp' vlog.dharamshala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.last_updated.second vlog.writer %}" style="color:black;">Vlog by {{vlog.writer}}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'shala_vlog_descp' vlog.dharamshala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.writer %}" style="color:black;">Vlog by {{vlog.writer}}</a></li>
       <li class="breadcrumb-item active">Edit</li>
     </ol>
 </div>
