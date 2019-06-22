@@ -35,7 +35,7 @@ class NewVlogForm(forms.ModelForm):
 class Feedback_form(forms.ModelForm):
     Feedback = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 15, 'placeholder': 'Suggestiongs please :)'}
+            attrs={'rows': 15, 'placeholder': 'Suggestions please :)'}
         ),
         max_length=5000,
         help_text='The max length of the text is 5000.'
