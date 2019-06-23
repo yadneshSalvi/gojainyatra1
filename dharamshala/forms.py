@@ -1,6 +1,7 @@
 from django import forms
 from .models import Booking,vlog,Feedback
 from django.contrib.admin.widgets import AdminDateWidget
+from datetime import datetime
 
 
 class NewBookingForm(forms.ModelForm):
@@ -15,9 +16,22 @@ class NewBookingForm(forms.ModelForm):
         ),
     )
     phone_no = forms.CharField(max_length = 10, min_length = 10)
+
+    def clean(self):
+        cleaned_data = super(NewBookingForm, self).clean()
+        First_Name = cleaned_data['First_Name']
+        Last_Name = cleaned_data['Last_Name']
+        email_id = cleaned_data['email_id']
+        phone_no = cleaned_data['phone_no']
+        checkin_date = cleaned_data['checkin_date']
+        checkout_date = cleaned_data['checkout_date']
+        room_type = cleaned_data['room_type']
+        if (datetime.now().date()>checkin_date or datetime.now().date()>checkout_date):
+            raise forms.ValidationError("Please enter valid dates")
+        return cleaned_data
     class Meta:
         model = Booking
-        fields = ['First_Name','Last_Name','email_id','phone_no','checkin_date','checkout_date','room_type']
+        fields = ['First_Name','Last_Name','email_id','phone_no','checkin_date','checkout_date','room_type','Number_of_adults','Number_of_children']
     
 class NewVlogForm(forms.ModelForm):
     blog = forms.CharField(

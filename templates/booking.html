@@ -44,6 +44,7 @@
     <form method="post" novalidate>
       {% csrf_token %}
       <div class="row">
+        <div id='form-errors'>{{ form_errors }}</div>
         <div class="col-sm-12 col-md-6">
           {{form.First_Name|as_crispy_field}}
         </div>
@@ -61,6 +62,7 @@
             {{form.checkout_date|as_crispy_field}}
         </div>
       </div>
+      <strong>{{ form.non_field_errors }}</strong>
       <div class="row">
         <div class="col-sm-12 col-md-6">
           {{form.room_type|as_crispy_field}}
@@ -70,87 +72,97 @@
         </div>
       </div>
       <div class="row" id="myid" style="display:none; background-color: rgb(233, 236, 239); padding-top:5px;padding-left:10px;margin-top:5px;">
-        <p>Please write only "AC" or "Non-AC" or "Hall-1",etc.</p>
-        <p>Rooms in this Dharamshala:</p>
-        <ul>
-          {% if shala.rooms_type1 %}
-            <li>
-              {{shala.rooms_type1}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type2 %}
-            <li>
-              {{shala.rooms_type2}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type3 %}
-            <li>
-              {{shala.rooms_type3}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type4 %}
-            <li>
-              {{shala.rooms_type4}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type5 %}
-            <li>
-              {{shala.rooms_type5}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type6 %}
-            <li>
-              {{shala.rooms_type6}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type7 %}
-            <li>
-              {{shala.rooms_type7}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type8 %}
-            <li>
-              {{shala.rooms_type8}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type9 %}
-            <li>
-              {{shala.rooms_type9}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type10 %}
-            <li>
-              {{shala.rooms_type10}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type11 %}
-            <li>
-              {{shala.rooms_type11}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type12 %}
-            <li>
-              {{shala.rooms_type12}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type13 %}
-            <li>
-              {{shala.rooms_type13}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type14 %}
-            <li>
-              {{shala.rooms_type14}}
-            </li>
-          {% endif %}
-          {% if shala.rooms_type15 %}
-            <li>
-              {{shala.rooms_type15}}
-            </li>
-          {% endif %}
-          </li>
+          <p>Please write only "AC" or "Non-AC" or "Hall", etc.</p>
+          <p>Rooms in this Dharamshala:</p>
+          <ul>
+            {% if shala.rooms_type1 %}
+              <li>
+                {{shala.rooms_type1}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type2 %}
+              <li>
+                {{shala.rooms_type2}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type3 %}
+              <li>
+                {{shala.rooms_type3}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type4 %}
+              <li>
+                {{shala.rooms_type4}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type5 %}
+              <li>
+                {{shala.rooms_type5}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type6 %}
+              <li>
+                {{shala.rooms_type6}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type7 %}
+              <li>
+                {{shala.rooms_type7}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type8 %}
+              <li>
+                {{shala.rooms_type8}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type9 %}
+              <li>
+                {{shala.rooms_type9}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type10 %}
+              <li>
+                {{shala.rooms_type10}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type11 %}
+              <li>
+                {{shala.rooms_type11}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type12 %}
+              <li>
+                {{shala.rooms_type12}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type13 %}
+              <li>
+                {{shala.rooms_type13}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type14 %}
+              <li>
+                {{shala.rooms_type14}}
+              </li>
+            {% endif %}
+            {% if shala.rooms_type15 %}
+              <li>
+                {{shala.rooms_type15}}
+              </li>
+            {% endif %}
+            
         </ul>
       </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          {{form.Number_of_adults|as_crispy_field}}
+        </div>
+        <div class="col-sm-12 col-md-6">
+            {{form.Number_of_children|as_crispy_field}}
+        </div>
+      </div>
+      
+      
       <button type="submit" class="btn btn-success" style="margin-top:10px;">Request Booking</button>
     </form>
   </div>

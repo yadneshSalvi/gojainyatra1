@@ -124,6 +124,7 @@ def booking(request,slug):
     shala = get_object_or_404(Shala,name_without_space=slug)
     if request.method == 'POST':
         form = NewBookingForm(request.POST)
+        
         if form.is_valid():
             booking = form.save(commit=False)
             booking.dharamshala = shala
@@ -137,7 +138,7 @@ def booking(request,slug):
             checkin_date = form.cleaned_data.get('checkin_date')
             checkout_date = form.cleaned_data.get('checkout_date')
             room_type = form.cleaned_data.get('room_type')
-            subject = 'Received Booking request.'
+            subject = '[GoJainYatra]Received Booking request.'
             mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
             to_email = form.cleaned_data.get('email_id')
             send_mail(subject,mail_body,'support@gojainyatra.com',[to_email,],fail_silently=False)
@@ -147,6 +148,7 @@ def booking(request,slug):
             if not request.user.is_authenticated:
                 return redirect('home')
             return redirect ('user_bookings')
+        
     else:
         form = NewBookingForm()
     return render(request,'booking.html',{'shala':shala,'form':form})

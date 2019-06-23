@@ -4,6 +4,7 @@ from datetime import datetime
 from django.utils.text import Truncator
 from django.utils.html import mark_safe
 from markdown import markdown
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -127,10 +128,15 @@ class Booking(models.Model):
     dharamshala = models.ForeignKey(Shala,related_name='bookings',on_delete=models.CASCADE)
     booked_by = models.ForeignKey(User,related_name='bookings',on_delete=models.CASCADE,null=True,blank=True)
     booked_at = models.DateTimeField(auto_now_add = True)
+    Number_of_adults = models.IntegerField(null=True, blank=True, default=1)
+    Number_of_children = models.IntegerField(null=True, blank=True, default=0)
     #in final model change above field to auto_now_add = True
     def __str__(self):
         return self.First_Name
 
+    #def clean(self):
+    #    if (self.dharamshala.NAfromDate1<=self.checkin_date and self.checkin_date<=self.dharamshala.NAtoDate1):
+    #       raise ValidationError('Sorry booking of this dharamshala is not available between the dates '+str(self.dharamshala.NAfromDate1)+' to '+str(self.dharamshala.NAtoDate1))
     #def get_all_bookings(self):
     #    return bookings.objects.order_by('-last_updated')
 
