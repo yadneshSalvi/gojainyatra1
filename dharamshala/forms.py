@@ -28,6 +28,8 @@ class NewBookingForm(forms.ModelForm):
         room_type = cleaned_data['room_type']
         if (datetime.now().date()>checkin_date or datetime.now().date()>checkout_date):
             raise forms.ValidationError("Please enter valid dates")
+        if (checkin_date>checkout_date):
+            raise forms.ValidationError("Check out date should be after Checkin date")
         return cleaned_data
     class Meta:
         model = Booking

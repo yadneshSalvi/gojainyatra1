@@ -13,7 +13,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.mail import send_mail
-
+from django.template.loader import render_to_string
+from django.template.loader import get_template
+from django.template import Context
 # Create your views here.
 
 def search (request):
@@ -138,12 +140,47 @@ def booking(request,slug):
             checkin_date = form.cleaned_data.get('checkin_date')
             checkout_date = form.cleaned_data.get('checkout_date')
             room_type = form.cleaned_data.get('room_type')
-            subject = '[GoJainYatra]Received Booking request.'
-            mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
+            no_adults = form.cleaned_data.get('Number_of_adults')
+            no_children = form.cleaned_data.get('Number_of_children')
+            subject = '[GoJainYatra]Received Booking request for '+str(dharamshala)+'.'
+            #mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
             to_email = form.cleaned_data.get('email_id')
-            send_mail(subject,mail_body,'support@gojainyatra.com',[to_email,],fail_silently=False)
-            dhairya_mail = 'Name : '+str(first_name)+' '+str(last_name)+'. Phone no. : '+str(phone_no)+'. Dharamshala : '+str(dharamshala)+'. Checkin date: '+str(checkin_date)+' Checkout date: '+str(checkout_date)+'. Room type : '+str(room_type)
-            send_mail(subject,dhairya_mail,'support@gojainyatra.com',['rasilabengangar51@gmail.com','support@gojainyatra.com',],fail_silently=False)
+            send_mail(subject,
+            get_template('provisional_booking.html').render(
+                {
+                    'first_name': first_name,
+                    'last_name':last_name,
+                    'phone_no':phone_no,
+                    'dharamshala':dharamshala,
+                    'checkin_date':checkin_date,
+                    'checkout_date':checkout_date,
+                    'room_type':room_type,
+                    'no_adults':no_adults,
+                    'no_children':no_children
+                }
+            ),
+            'support@gojainyatra.com',
+            [to_email,],
+            fail_silently=False)
+            subject_dhairya = '[GoJainYatra]Received Booking request for '+str(dharamshala)+' from '+str(first_name)+'.'
+            #dhairya_mail = 'Name : '+str(first_name)+' '+str(last_name)+'. Phone no. : '+str(phone_no)+'. Dharamshala : '+str(dharamshala)+'. Checkin date: '+str(checkin_date)+' Checkout date: '+str(checkout_date)+'. Room type : '+str(room_type)
+            send_mail(subject_dhairya,
+            get_template('dhairya_provisional_booking.html').render(
+                {
+                    'first_name': first_name,
+                    'last_name':last_name,
+                    'phone_no':phone_no,
+                    'dharamshala':dharamshala,
+                    'checkin_date':checkin_date,
+                    'checkout_date':checkout_date,
+                    'room_type':room_type,
+                    'no_adults':no_adults,
+                    'no_children':no_children
+                }
+            ),
+            'support@gojainyatra.com',
+            ['rasilabengangar51@gmail.com','support@gojainyatra.com',]
+            ,fail_silently=False)
             messages.success(request, 'You have requested for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.')
             if not request.user.is_authenticated:
                 return redirect('home')

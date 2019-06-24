@@ -1,0 +1,12 @@
+Hello {{first_name}}!
+
+We have receieved your booking request for {{dharamshala}} with following details,
+
+First Name : {{first_name}}     Last Name : {{last_name}}
+Phone no : {{phone_no}}
+Check in date : {{checkin_date}}    Check out date : {{checkout_date}}
+Room type : {{room_type}}
+Number of adults : {{no_adults}}    Number of children : {{no_children}}
+
+Our team will contact you shortly on the phone number you have provided.
+Thank you for using GoJainYatra.
