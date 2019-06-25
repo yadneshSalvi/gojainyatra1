@@ -25,7 +25,7 @@
 {% block content %}
     <div class="container" style="padding-top:10px;">
         <table class="table">
-            <thead class="thead-inverse">
+            <thead class="thead-dark">
               <tr>
                 <th>Dharamshala</th>
                 <th>Number of Vlogs</th>
@@ -36,7 +36,7 @@
               {% for shala in shalas %}
                 <tr>
                     <td>
-                        <a href="{% url 'shala_info' shala.name_without_space %}" style="color:black;">
+                        <a href="{% url 'shala_vlogs_list' shala.name_without_space %}" style="color:black;">
                             {{shala.name_with_space}}
                             <small class="text-muted d-block">{{shala.city_or_location}}</small>
                         </a>

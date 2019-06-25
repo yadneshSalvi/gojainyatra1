@@ -43,5 +43,10 @@
     {% if booking.room_type != 'select' %}
         <span>Room Type = {{booking.room_type}}</span><br>
     {% endif %}
+    {% if booking.status == '1' %}
+        <span style="color:red;">Status : Waiting for confirmation</span>
+    {% else %}
+        <span style="color:green;">Status : Confirmed</span>
+    {% endif %}
 </div>
 {% endblock %}

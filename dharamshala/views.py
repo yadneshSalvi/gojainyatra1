@@ -16,6 +16,9 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.template.loader import get_template
 from django.template import Context
+from django.utils.timezone import activate
+from test2 import settings
+activate(settings.TIME_ZONE)
 # Create your views here.
 
 def search (request):
@@ -67,7 +70,6 @@ class UserUpdateView(UpdateView):
     fields = ('first_name', 'last_name', 'email', )
     template_name = 'my_account.html'
     success_url = reverse_lazy('my_account')
-
     def get_object(self):
         return self.request.user
 

@@ -1,12 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import mark_safe
 from markdown import markdown
 from django.core.exceptions import ValidationError
+from datetime import datetime
 
 # Create your models here.
+STATUS_CHOICES = (
+    ('1', 'Waiting for confirmation'),
+    ('2', 'Confirmed'),
+)
 
 class Shala(models.Model):
     name_without_space = models.CharField(max_length = 30, unique = True)
@@ -122,14 +127,15 @@ class Booking(models.Model):
     Last_Name = models.CharField(max_length=100)
     email_id = models.EmailField(max_length=100)
     phone_no = models.CharField(max_length=10)
-    checkin_date = models.DateField(null=True,blank=True)
-    checkout_date = models.DateField(null=True,blank=True)
+    checkin_date = models.DateField(default=timezone.now)
+    checkout_date = models.DateField(default=timezone.now)
     room_type = models.CharField(max_length=100,blank=True,null=True,default="select")
     dharamshala = models.ForeignKey(Shala,related_name='bookings',on_delete=models.CASCADE)
     booked_by = models.ForeignKey(User,related_name='bookings',on_delete=models.CASCADE,null=True,blank=True)
-    booked_at = models.DateTimeField(auto_now_add = True)
+    booked_at = models.DateTimeField(default=timezone.now)
     Number_of_adults = models.IntegerField(null=True, blank=True, default=1)
     Number_of_children = models.IntegerField(null=True, blank=True, default=0)
+    status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='1')
     #in final model change above field to auto_now_add = True
     def __str__(self):
         return self.First_Name

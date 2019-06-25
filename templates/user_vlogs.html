@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-    
+{% load tz %}  
 {% block stylesheet %}
    <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
 {% endblock %}
@@ -31,7 +31,7 @@
 </div>
 <div class="container" style="padding-top:10px;">
     <table class="table">
-        <thead class="thead-inverse">
+        <thead class="thead-dark">
           <tr>
             <th>Vlog on Dharamshala</th>
             <th>Written on</th>
@@ -41,11 +41,15 @@
           {% for vlog in vlogs %}
             <tr>
                 <td>
-                    <a href="{% url 'shala_vlog_descp' vlog.dharamshala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day vlog.last_updated.hour vlog.last_updated.minute vlog.writer%}" 
-                    style="color:black;">
-                        {{vlog.dharamshala.name_with_space}}
-                        <small class="text-muted d-block">{{vlog.dharamshala.city_or_location}}</small>
-                    </a>
+                    {% with hour=vlog.last_updated|time:"H"%}
+                        {% with min=vlog.last_updated|time:"i"%}
+                            <a href="{% url 'shala_vlog_descp' vlog.dharamshala.name_without_space vlog.last_updated.year vlog.last_updated.month vlog.last_updated.day hour min vlog.writer%}" 
+                            style="color:black;">
+                                {{vlog.dharamshala.name_with_space}}
+                                <small class="text-muted d-block">{{vlog.dharamshala.city_or_location}}</small>
+                            </a>
+                        {% endwith %}
+                    {% endwith %}
                 </td>
                 <td class="align-middle">
                     <a href="#" style="color:black;">

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% load static %}
-    
+{% load tz %}
+
 {% block stylesheet %}
    <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
 {% endblock %}
@@ -38,26 +39,42 @@
         {% endfor %}
     {% endif %}
     <table class="table">
-        <thead class="thead-inverse">
+        <thead class="thead-dark">
           <tr>
             <th>Booking for Dharamshala</th>
             <th>Booking Date</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           {% for booking in bookings %}
             <tr>
                 <td>
-                    <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day booking.booked_at.hour booking.booked_at.minute%}" 
-                    style="color:black;">
-                        {{booking.dharamshala.name_with_space}}
-                        <small class="text-muted d-block">{{booking.dharamshala.city_or_location}}</small>
-                    </a>
+                    {% with hour=booking.booked_at|time:"H"%}
+                        {% with min=booking.booked_at|time:"i"%}
+                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" 
+                            style="color:black;">
+                                {{booking.dharamshala.name_with_space}}
+                                <small class="text-muted d-block">{{booking.dharamshala.city_or_location}}</small>
+                            </a>
+                        {% endwith %}
+                    {% endwith %}
                 </td>
                 <td class="align-middle">
-                    <a href="" style="color:black;">
-                        {{booking.booked_at}}
-                    </a>
+                    {% with hour=booking.booked_at|time:"H"%}
+                        {% with min=booking.booked_at|time:"i"%}
+                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
+                                {{booking.booked_at}}
+                            </a>
+                        {% endwith %}
+                    {% endwith %}
+                </td>
+                <td>
+                    {% if booking.status == '1' %}
+                        <span style="color:red;">Waiting for confirmation</span>
+                    {% else %}
+                        <span style="color:green;">Confirmed</span>
+                    {% endif %}
                 </td>
             </tr>
           {% endfor %}
@@ -65,3 +82,4 @@
     </table>
 </div>
 {% endblock %}
+
