@@ -181,8 +181,21 @@ def booking(request,slug):
                 }
             ),
             'support@gojainyatra.com',
-            ['rasilabengangar51@gmail.com','support@gojainyatra.com',]
-            ,fail_silently=False)
+            ['support@gojainyatra.com',]#'rasilabengangar51@gmail.com',
+            ,fail_silently=False,
+            html_message=get_template('dhairya_provisional_booking.html').render(
+                {
+                    'first_name': first_name,
+                    'last_name':last_name,
+                    'phone_no':phone_no,
+                    'dharamshala':dharamshala,
+                    'checkin_date':checkin_date,
+                    'checkout_date':checkout_date,
+                    'room_type':room_type,
+                    'no_adults':no_adults,
+                    'no_children':no_children
+                }
+            ),)
             messages.success(request, 'You have requested for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.')
             if not request.user.is_authenticated:
                 return redirect('home')
