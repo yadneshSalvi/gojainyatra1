@@ -1,9 +1,9 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Q
 from django.http import HttpResponse
-from .models import Shala, Booking,vlog
+from .models import Shala, Booking,vlog,Voucher
 from django.contrib.auth.models import User
-from .forms import NewBookingForm,NewVlogForm,Feedback_form
+from .forms import NewBookingForm,NewVlogForm,Feedback_form,NewVoucherForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import UpdateView
 from django.utils import timezone
@@ -16,6 +16,9 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.template.loader import get_template
 from django.template import Context
+from django.utils.formats import localize
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.timezone import localdate
 from django.utils.timezone import activate
 from test2 import settings
 activate(settings.TIME_ZONE)
@@ -181,7 +184,7 @@ def booking(request,slug):
                 }
             ),
             'support@gojainyatra.com',
-            ['support@gojainyatra.com',]#'rasilabengangar51@gmail.com',
+            ['support@gojainyatra.com','rasilabengangar51@gmail.com',]
             ,fail_silently=False,
             html_message=get_template('dhairya_provisional_booking.html').render(
                 {
@@ -231,7 +234,95 @@ def user_vlogs(request):
     return render(request,'user_vlogs.html',{'vlogs':vlogs})
 
 @login_required
-def user_bookings_descp(request,username,year,month,day,hour,minute,):
+def user_bookings_descp(request,username,year,month,day,hour,minute):
     booking = get_object_or_404(Booking,booked_by__username=username,booked_at__year=year,booked_at__month=month,booked_at__day=day,
     booked_at__hour=hour,booked_at__minute=minute)
     return render(request,'user_bookings_descp.html',{'booking':booking})
+
+@staff_member_required
+def pre_voucher(request):
+    bookings = Booking.objects.all().order_by('-booked_at')
+    return render(request,'pre_voucher.html',{'bookings':bookings})
+
+@staff_member_required
+def voucher_form(request,first_name,last_name,year,month,day,hour,minute):
+    booking = get_object_or_404(Booking,First_Name=first_name,Last_Name=last_name,booked_at__year=year,booked_at__month=month,
+    booked_at__day=day,booked_at__hour=hour,booked_at__minute=minute)
+    if request.method == 'POST':
+        form = NewVoucherForm(request.POST)
+        if form.is_valid():
+            voucher = form.save(commit=False)
+            voucher.save()
+            pk = voucher.pk
+            return redirect ('voucher_send',pk=pk)
+    else:
+        yatri_name = str(booking.First_Name)+' '+str(booking.Last_Name)
+        today_date = str(localize(localdate()))
+        name_dharamshala = str(booking.dharamshala.name_with_space)
+        address = str(booking.dharamshala.description) 
+        yatri_email = str(booking.email_id)
+        yatri_phone = str(booking.phone_no)
+        if booking.Number_of_children!=0:
+            no_of_yatris = str(booking.Number_of_adults)+' adults, '+str(booking.Number_of_children)+' children'
+        else:
+            no_of_yatris = str(booking.Number_of_adults)+' adults'
+        if booking.room_type!='select' and booking.room_type!=None:
+            no_and_type_of_room = str(booking.room_type)
+        else:
+            no_and_type_of_room = '-'
+        checkin_date = str(localize(booking.checkin_date))
+        checkout_date = str(localize(booking.checkout_date))
+        total_days_of_stay = int((booking.checkin_date - booking.checkout_date).days)
+        data_dict = {'yatri_name':yatri_name,'today_date':today_date,'type_of_dharamshala_or_bunglow_or_sanatorium':'Dharamshala',
+        'name_of_dharamshala_or_bunglow_or_sanatorium':name_dharamshala,'address':address,'yatri_email':yatri_email,
+        'yatri_phone':yatri_phone,'no_of_yatris':no_of_yatris,'no_and_type_of_room':no_and_type_of_room,
+        'checkin_date':checkin_date,'checkout_date':checkout_date,'total_days_of_stay':total_days_of_stay}
+        form = NewVoucherForm(initial=data_dict)
+    return render(request,'voucher_form.html',{'booking':booking,'form':form})
+
+@staff_member_required
+def voucher_send(request,pk):
+    voucher = get_object_or_404(Voucher,pk=pk)
+    return render(request,'voucher_send.html',{'voucher':voucher})
+
+@method_decorator(staff_member_required, name='dispatch')
+class VoucherUpdateView(UpdateView):
+    model = Voucher
+    fields = ('yatri_name','today_date','type_of_dharamshala_or_bunglow_or_sanatorium',
+        'name_of_dharamshala_or_bunglow_or_sanatorium','address','phone_of_dharamshala_or_bunglow_or_sanatorium',
+        'yatri_email','yatri_phone','no_of_yatris','no_and_type_of_room','checkin_date','checkout_date',
+        'total_days_of_stay','amount_received','booking_number','bank_ref_no')
+    template_name = 'edit_voucher.html'
+    pk_url_kwarg = 'voucher_pk'
+    context_object_name = 'voucher'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+
+    def form_valid(self, form):
+        voucher = form.save(commit=False)
+        voucher.save()
+        return redirect('voucher_send', pk=voucher.pk)
+
+@staff_member_required
+def voucher_send_success(request,pk):
+    voucher = get_object_or_404(Voucher,pk=pk)
+    subject = '[GoJainYatra] Confirmation Booking Voucher'
+    to_email = voucher.yatri_email
+    send_mail(subject,
+        get_template('voucher_email.html').render(
+            {
+                    'voucher':voucher,
+                }
+            ),
+            'support@gojainyatra.com',
+            [to_email,]
+            ,fail_silently=False,
+            html_message=get_template('voucher_email.html').render(
+                {
+                    'voucher':voucher,
+                }
+            ),
+        )
+    return render(request,'voucher_send_success.html',{'voucher':voucher})

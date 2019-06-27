@@ -27,7 +27,7 @@
 <div class="container">
     <ol class="breadcrumb my-4">
       <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color:black;">Home</a></li>
-      <li class="breadcrumb-item active">My bookings</li>
+      <li class="breadcrumb-item active">All bookings</li>
       
     </ol>
 </div>
@@ -38,10 +38,12 @@
             <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
         {% endfor %}
     {% endif %}
+    <p>Choose the booking for which you want to generate the voucher</p>
     <table class="table">
         <thead class="thead-dark">
           <tr>
             <th>Booking for Dharamshala</th>
+            <th>Booked by</th>
             <th>Checkin Date</th>
             <th>Checkout Date</th>
             <th>Status</th>
@@ -53,7 +55,7 @@
                 <td>
                     {% with hour=booking.booked_at|time:"H"%}
                         {% with min=booking.booked_at|time:"i"%}
-                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" 
+                            <a href="{%url 'voucher_form' booking.First_Name booking.Last_Name booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" 
                             style="color:black;">
                                 {{booking.dharamshala.name_with_space}}
                                 <small class="text-muted d-block">Booked on : {{booking.booked_at}}</small>
@@ -61,10 +63,20 @@
                         {% endwith %}
                     {% endwith %}
                 </td>
+                <td>
+                    {% with hour=booking.booked_at|time:"H"%}
+                        {% with min=booking.booked_at|time:"i"%}
+                            <a href="{%url 'voucher_form' booking.First_Name booking.Last_Name booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" 
+                            style="color:black;">
+                                {{booking.First_Name}} {{booking.Last_Name}}
+                            </a>
+                        {% endwith %}
+                    {% endwith %}
+                </td>
                 <td class="align-middle">
                     {% with hour=booking.booked_at|time:"H"%}
                         {% with min=booking.booked_at|time:"i"%}
-                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
+                            <a href="{%url 'voucher_form' booking.First_Name booking.Last_Name booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
                                 {{booking.checkin_date}}
                             </a>
                         {% endwith %}
@@ -73,13 +85,12 @@
                 <td class="align-middle">
                     {% with hour=booking.booked_at|time:"H"%}
                         {% with min=booking.booked_at|time:"i"%}
-                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
+                            <a href="{%url 'voucher_form' booking.First_Name booking.Last_Name booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
                                 {{booking.checkout_date}}
                             </a>
                         {% endwith %}
                     {% endwith %}
                 </td>
-
                 <td>
                     {% if booking.status == '1' %}
                         <span style="color:red;">Waiting for confirmation</span>

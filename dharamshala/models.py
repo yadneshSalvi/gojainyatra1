@@ -155,3 +155,24 @@ class Feedback(models.Model):
         if self.Name:
             return self.Name
         return name
+
+class Voucher(models.Model):
+    yatri_name = models.CharField(max_length=100)
+    today_date = models.CharField(max_length=100,blank=True,null=True)
+    type_of_dharamshala_or_bunglow_or_sanatorium = models.CharField(max_length=100)
+    name_of_dharamshala_or_bunglow_or_sanatorium = models.CharField(max_length=100)
+    address = models.TextField(max_length=500,blank=True,null=True)
+    phone_of_dharamshala_or_bunglow_or_sanatorium = models.CharField(max_length=12,blank=True,null=True)
+    yatri_email = models.EmailField(blank=True,null=True)
+    yatri_phone = models.CharField(max_length=12)
+    no_of_yatris = models.CharField(max_length=100,blank=True,null=True)
+    no_and_type_of_room = models.CharField(max_length=100,blank=True,null=True)
+    checkin_date = models.CharField(max_length=100,blank=True,null=True)
+    checkout_date = models.CharField(max_length=100,blank=True,null=True)
+    total_days_of_stay = models.CharField(max_length=3,blank=True,null=True)
+    amount_received = models.CharField(max_length=100,blank=True,null=True)
+    booking_number = models.CharField(max_length=100,blank=True,null=True)
+    bank_ref_no = models.CharField(max_length=100,blank=True,null=True)
+
+    def __str__(self):
+        return self.yatri_name

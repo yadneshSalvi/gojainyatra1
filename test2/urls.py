@@ -62,6 +62,11 @@ urlpatterns = [
     path('list_dharamshala/',views.list_dharamshala,name='list_dharamshala'),
     path('dharamshala/<slug:slug>/booking/',views.booking,name='booking'),
     path('dharamshala/<slug:slug>/write_vlog/',views.write_vlog,name='write_vlog'),
+    path('after_booking/confirmation/generate/pre_voucher',views.pre_voucher,name='pre_voucher'),
+    path('gen/<first_name>/<last_name>/<year>/<month>/<day>/<hour>/<minute>/form/',views.voucher_form,name='voucher_form'),
+    path('gen/<pk>/send/',views.voucher_send,name='voucher_send'),
+    path('gen/<voucher_pk>/edit/',views.VoucherUpdateView.as_view(),name='edit_voucher'),
+    path('gen/<pk>/sent/',views.voucher_send_success,name='voucher_send_success')
 ]
 
 if settings.DEBUG:

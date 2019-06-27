@@ -1,5 +1,5 @@
 from django import forms
-from .models import Booking,vlog,Feedback
+from .models import Booking,vlog,Feedback,Voucher
 from django.contrib.admin.widgets import AdminDateWidget
 from datetime import datetime
 
@@ -65,3 +65,17 @@ class Feedback_form(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ['Feedback','Name']
+
+class NewVoucherForm(forms.ModelForm):
+    address = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 3}
+        ),
+        max_length=500,
+    )
+    class Meta:
+        model = Voucher
+        fields = ['yatri_name','today_date','type_of_dharamshala_or_bunglow_or_sanatorium',
+        'name_of_dharamshala_or_bunglow_or_sanatorium','address','phone_of_dharamshala_or_bunglow_or_sanatorium',
+        'yatri_email','yatri_phone','no_of_yatris','no_and_type_of_room','checkin_date','checkout_date',
+        'total_days_of_stay','amount_received','booking_number','bank_ref_no']
