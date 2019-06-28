@@ -53,7 +53,7 @@
                 <td>
                     {% with hour=booking.booked_at|time:"H"%}
                         {% with min=booking.booked_at|time:"i"%}
-                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" 
+                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min booking.pk%}" 
                             style="color:black;">
                                 {{booking.dharamshala.name_with_space}}
                                 <small class="text-muted d-block">Booked on : {{booking.booked_at}}</small>
@@ -64,7 +64,7 @@
                 <td class="align-middle">
                     {% with hour=booking.booked_at|time:"H"%}
                         {% with min=booking.booked_at|time:"i"%}
-                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
+                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min booking.pk%}" style="color:black;">
                                 {{booking.checkin_date}}
                             </a>
                         {% endwith %}
@@ -73,7 +73,7 @@
                 <td class="align-middle">
                     {% with hour=booking.booked_at|time:"H"%}
                         {% with min=booking.booked_at|time:"i"%}
-                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min%}" style="color:black;">
+                            <a href="{%url 'user_bookings_descp' booking.booked_by booking.booked_at.year booking.booked_at.month booking.booked_at.day hour min booking.pk%}" style="color:black;">
                                 {{booking.checkout_date}}
                             </a>
                         {% endwith %}
@@ -85,6 +85,7 @@
                         <span style="color:red;">Waiting for confirmation</span>
                     {% else %}
                         <span style="color:green;">Confirmed</span>
+                        <small class="text-muted d-block">Confirmation voucher sent</small>
                     {% endif %}
                 </td>
             </tr>

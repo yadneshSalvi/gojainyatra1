@@ -12,6 +12,7 @@ from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.template.loader import get_template
@@ -234,9 +235,9 @@ def user_vlogs(request):
     return render(request,'user_vlogs.html',{'vlogs':vlogs})
 
 @login_required
-def user_bookings_descp(request,username,year,month,day,hour,minute):
+def user_bookings_descp(request,username,year,month,day,hour,minute,booking_pk_p):
     booking = get_object_or_404(Booking,booked_by__username=username,booked_at__year=year,booked_at__month=month,booked_at__day=day,
-    booked_at__hour=hour,booked_at__minute=minute)
+    booked_at__hour=hour,booked_at__minute=minute,pk=booking_pk_p)
     return render(request,'user_bookings_descp.html',{'booking':booking})
 
 @staff_member_required
@@ -245,15 +246,17 @@ def pre_voucher(request):
     return render(request,'pre_voucher.html',{'bookings':bookings})
 
 @staff_member_required
-def voucher_form(request,first_name,last_name,year,month,day,hour,minute):
+def voucher_form(request,first_name,last_name,year,month,day,hour,minute,booking_pk_p):
     booking = get_object_or_404(Booking,First_Name=first_name,Last_Name=last_name,booked_at__year=year,booked_at__month=month,
-    booked_at__day=day,booked_at__hour=hour,booked_at__minute=minute)
+    booked_at__day=day,booked_at__hour=hour,booked_at__minute=minute,pk=booking_pk_p)
+    request.session['booking_pk']=int(booking.pk)
     if request.method == 'POST':
         form = NewVoucherForm(request.POST)
         if form.is_valid():
             voucher = form.save(commit=False)
             voucher.save()
             pk = voucher.pk
+            
             return redirect ('voucher_send',pk=pk)
     else:
         yatri_name = str(booking.First_Name)+' '+str(booking.Last_Name)
@@ -308,6 +311,12 @@ class VoucherUpdateView(UpdateView):
 @staff_member_required
 def voucher_send_success(request,pk):
     voucher = get_object_or_404(Voucher,pk=pk)
+    booking_pk = request.session['booking_pk']
+    booking = get_object_or_404(Booking,pk=booking_pk)
+    booking.status = int(2)
+    booking.save()
+    request.session.pop('booking_pk', None)
+    request.session.modified = True
     subject = '[GoJainYatra] Confirmation Booking Voucher'
     to_email = voucher.yatri_email
     send_mail(subject,
