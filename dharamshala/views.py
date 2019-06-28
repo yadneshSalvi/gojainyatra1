@@ -78,7 +78,7 @@ class UserUpdateView(UpdateView):
         return self.request.user
 
 def home(request):
-    queryset = Shala.objects.all()
+    queryset = Shala.objects.all().order_by('ranking')
     page = request.GET.get('page', 1)
     paginator = Paginator(queryset, 9)
 

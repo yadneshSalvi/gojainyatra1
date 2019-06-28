@@ -92,6 +92,7 @@ class Shala(models.Model):
     image10 = models.ImageField(upload_to='images/',blank=True,null=True)
     image11 = models.ImageField(upload_to='images/',blank=True,null=True)
     image12 = models.ImageField(upload_to='images/',blank=True,null=True)
+    ranking = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name_with_space
