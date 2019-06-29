@@ -45,29 +45,29 @@
       {% csrf_token %}
       <div class="row">
         <div id='form-errors'>{{ form_errors }}</div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-10 col-md-6">
           {{form.First_Name|as_crispy_field}}
         </div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-10 col-md-6">
             {{form.Last_Name|as_crispy_field}}
         </div>
       </div>
       {{form.email_id|as_crispy_field}}
       {{form.phone_no|as_crispy_field}}
       <div class="row">
-        <div class="col-sm-12 col-md-6 datepicker" data-date-format="dd/mm/yyyy">
+        <div class="col-sm-10 col-md-6 datepicker" data-date-format="dd/mm/yyyy">
           {{form.checkin_date|as_crispy_field}}
         </div>
-        <div class="col-sm-12 col-md-6 datepicker" data-date-format="dd/mm/yyyy">
+        <div class="col-sm-10 col-md-6 datepicker" data-date-format="dd/mm/yyyy">
           {{form.checkout_date|as_crispy_field}}
         </div>
       </div>
       <div>{{ form|as_crispy_errors }}</div>
       <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-10 col-md-6">
           {{form.room_type|as_crispy_field}}
         </div>
-        <div class="col-sm-12 col-md-6" style="padding-top:25px;">
+        <div class="col-sm-10 col-md-6" style="padding-top:25px;">
             <button type="button" class="btn btn-info" style="display:inline-block;vertical-align:middle;" onclick="myFunction()">See available room type</button>
         </div>
       </div>
@@ -154,10 +154,10 @@
         </ul>
       </div>
       <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-10 col-md-6">
           {{form.Number_of_adults|as_crispy_field}}
         </div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-10 col-md-6">
             {{form.Number_of_children|as_crispy_field}}
         </div>
       </div>
