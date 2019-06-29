@@ -92,7 +92,7 @@ class Shala(models.Model):
     image10 = models.ImageField(upload_to='images/',blank=True,null=True)
     image11 = models.ImageField(upload_to='images/',blank=True,null=True)
     image12 = models.ImageField(upload_to='images/',blank=True,null=True)
-    ranking = models.IntegerField(default=1)
+    ranking = models.IntegerField(default=100)
 
     def __str__(self):
         return self.name_with_space
@@ -102,6 +102,9 @@ class Shala(models.Model):
 
     def get_all_vlogs(self):
         return vlog.objects.filter(dharamshala=self).order_by('-last_updated')
+    
+    class Meta:
+        order_with_respect_to = 'ranking'
 
 class vlog(models.Model):
     blog = models.TextField(max_length=5000)
