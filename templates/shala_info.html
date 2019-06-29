@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% load static %}
-    
+
+{% block title %}
+  {{shala.name_with_space}}
+{% endblock %}
 {% block stylesheet %}
    <link rel="stylesheet" type="text/css" href="{% static 'layout.css' %}">
 {% endblock %}
