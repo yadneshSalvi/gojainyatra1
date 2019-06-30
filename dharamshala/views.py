@@ -185,7 +185,7 @@ def booking(request,slug):
                 }
             ),
             'support@gojainyatra.com',
-            ['support@gojainyatra.com','rasilabengangar51@gmail.com',]
+            ['support@gojainyatra.com','rasilabengangar51@gmail.com','starbooking9@gmail.com',]
             ,fail_silently=False,
             html_message=get_template('dhairya_provisional_booking.html').render(
                 {
