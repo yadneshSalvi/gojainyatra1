@@ -14,8 +14,8 @@ STATUS_CHOICES = (
 )
 
 class Shala(models.Model):
-    name_without_space = models.CharField(max_length = 30, unique = True)
-    name_with_space = models.CharField(max_length = 30, unique = True)
+    name_without_space = models.CharField(max_length = 200, unique = True)
+    name_with_space = models.CharField(max_length = 200, unique = True)
     rooms_starting_at = models.IntegerField()
     description = models.CharField(max_length = 400)
     city_or_location = models.CharField(max_length = 100)
