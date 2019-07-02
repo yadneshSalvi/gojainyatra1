@@ -18,6 +18,7 @@ class Shala(models.Model):
     name_with_space = models.CharField(max_length = 200, unique = True)
     rooms_starting_at = models.IntegerField()
     description = models.CharField(max_length = 400)
+    address_for_google_map = models.CharField(max_length=500,default='India')
     city_or_location = models.CharField(max_length = 100)
     state = models.CharField(max_length = 100)
     air_conditioner = models.BooleanField(default=False)

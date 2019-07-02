@@ -53,7 +53,10 @@ INSTALLED_APPS = [
     'dharamshala',
     'crispy_forms',
     'accounts',
+    'easy_maps',
 ]
+
+EASY_MAPS_GOOGLE_KEY = config('GOOGLE_MAP_API',default='')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
