@@ -41,8 +41,21 @@
   
   <div class="container" style="font-family:'Oxygen'; padding-top:10px;">
     <h4>Fill the form below, and a person from Team GoJainYatra will call you on your given mobile number.</h4>
-  
-    <div class="d-flex justify-content-center" style="padding-top:30px;padding-bottom:30px;">
+    {% if shala.NAfromDate1 %}
+       <div class="alert alert-danger" role="alert">Booking for this dharamshala is not available for the dates 
+         {{shala.NAfromDate1}} {% if shala.NAtoDate1 %}to {{shala.NAtoDate1}}{%endif%} 
+         {%if shala.NAfromDate2%}and {{shala.NAfromDate2}}{%endif%} {% if shala.NAtoDate2 != shala.NAfromDate2 %}to {{shala.NAtoDate2}}{%endif%} 
+         {%if shala.NAfromDate3%}and {{shala.NAfromDate3}}{%endif%} {% if shala.NAtoDate3 != shala.NAfromDate3 %}to {{shala.NAtoDate3}}{%endif%}
+       </div>
+    {% endif %}
+    {% if messages %}
+      <div class="alert alert-danger" role="alert">
+        {% for message in messages %}
+          <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="d-flex justify-content-center" style="padding-top:30px;padding-bottom:30px;">      
       <form method="post" novalidate>
         {% csrf_token %}
         <div class="row">
@@ -64,96 +77,12 @@
             {{form.checkout_date|as_crispy_field}}
           </div>
         </div>
+        
         <div>{{ form|as_crispy_errors }}</div>
         <div class="row">
-          <div class="col-sm-10 col-md-6">
+          <div class="col-sm-10 col-md-12">
             {{form.room_type|as_crispy_field}}
           </div>
-          <div class="col-sm-10 col-md-6" style="padding-top:25px;">
-              <button type="button" class="btn btn-info" style="display:inline-block;vertical-align:middle;" onclick="myFunction()">See available room type</button>
-          </div>
-        </div>
-        <div class="row" id="myid" style="display:none; background-color: rgb(233, 236, 239); padding-top:5px;padding-left:10px;margin-top:5px;">
-            <p>Please write only "AC" or "Non-AC" or "Hall", etc.</p>
-            <p>Rooms in this Dharamshala:</p>
-            <ul>
-              {% if shala.rooms_type1 %}
-                <li>
-                  {{shala.rooms_type1}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type2 %}
-                <li>
-                  {{shala.rooms_type2}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type3 %}
-                <li>
-                  {{shala.rooms_type3}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type4 %}
-                <li>
-                  {{shala.rooms_type4}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type5 %}
-                <li>
-                  {{shala.rooms_type5}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type6 %}
-                <li>
-                  {{shala.rooms_type6}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type7 %}
-                <li>
-                  {{shala.rooms_type7}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type8 %}
-                <li>
-                  {{shala.rooms_type8}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type9 %}
-                <li>
-                  {{shala.rooms_type9}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type10 %}
-                <li>
-                  {{shala.rooms_type10}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type11 %}
-                <li>
-                  {{shala.rooms_type11}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type12 %}
-                <li>
-                  {{shala.rooms_type12}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type13 %}
-                <li>
-                  {{shala.rooms_type13}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type14 %}
-                <li>
-                  {{shala.rooms_type14}}
-                </li>
-              {% endif %}
-              {% if shala.rooms_type15 %}
-                <li>
-                  {{shala.rooms_type15}}
-                </li>
-              {% endif %}
-              
-          </ul>
         </div>
         <div class="row">
           <div class="col-sm-10 col-md-6">

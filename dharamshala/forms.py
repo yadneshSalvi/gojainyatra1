@@ -24,7 +24,7 @@ class NewBookingForm(forms.ModelForm):
     initial=datetime.now().date()
     )
     phone_no = forms.CharField(max_length = 10, min_length = 10)
-
+    room_type = forms.ChoiceField()
     def clean(self):
         cleaned_data = super(NewBookingForm, self).clean()
         if not ('checkin_date' in cleaned_data.keys() and 'checkout_date' in cleaned_data.keys()):

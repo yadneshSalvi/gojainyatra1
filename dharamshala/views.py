@@ -130,10 +130,57 @@ def list_dharamshala(request):
 
 def booking(request,slug):
     shala = get_object_or_404(Shala,name_without_space=slug)
+    room_types = []
+    if shala.rooms_type1:
+        room_types.append(str(shala.rooms_type1))
+    if shala.rooms_type2:
+        room_types.append(str(shala.rooms_type2))
+    if shala.rooms_type3:
+        room_types.append(str(shala.rooms_type3))
+    if shala.rooms_type4:
+        room_types.append(str(shala.rooms_type4))
+    if shala.rooms_type5:
+        room_types.append(str(shala.rooms_type5))
+    if shala.rooms_type6:
+        room_types.append(str(shala.rooms_type6))
+    if shala.rooms_type7:
+        room_types.append(str(shala.rooms_type7))
+    if shala.rooms_type8:
+        room_types.append(str(shala.rooms_type8))
+    if shala.rooms_type9:
+        room_types.append(str(shala.rooms_type9))
+    if shala.rooms_type10:
+        room_types.append(str(shala.rooms_type10))
+    if shala.rooms_type11:
+        room_types.append(str(shala.rooms_type11))
+    if shala.rooms_type12:
+        room_types.append(str(shala.rooms_type12))
+    if shala.rooms_type13:
+        room_types.append(str(shala.rooms_type13))
+    if shala.rooms_type14:
+        room_types.append(str(shala.rooms_type14))
+    if shala.rooms_type15:
+        room_types.append(str(shala.rooms_type15))
     if request.method == 'POST':
         form = NewBookingForm(request.POST)
-        
+        form.fields['room_type'].choices=[(r,r)for r in room_types]
+
         if form.is_valid():
+            cin = form.cleaned_data.get('checkin_date')
+            cout = form.cleaned_data.get('checkout_date')
+            if shala.NAfromDate1:
+                if ((shala.NAfromDate1 <=cin and cin<= shala.NAtoDate1) or (shala.NAfromDate1 <cout and cout< shala.NAtoDate1)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(shala.NAfromDate1)+' to '+str(shala.NAtoDate1)+'. Please select other dates or search for another Dharamshala')
+                    return redirect('booking',slug=shala.name_without_space)
+            if shala.NAfromDate2:
+                if ((shala.NAfromDate2 <=cin and cin<= shala.NAtoDate2) or (shala.NAfromDate2 <cout and cout< shala.NAtoDate2)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(shala.NAfromDate2)+' to '+str(shala.NAtoDate2)+'. Please select other dates or search for another Dharamshala')
+                    return redirect('booking',slug=shala.name_without_space)
+            if shala.NAfromDate3:
+                if ((shala.NAfromDate3 <=cin and cin<= shala.NAtoDate3) or (shala.NAfromDate3 <cout and cout< shala.NAtoDate3)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(shala.NAfromDate3)+' to '+str(shala.NAtoDate3)+'. Please select other dates or search for another Dharamshala')
+                    return redirect('booking',slug=shala.name_without_space)
+
             booking = form.save(commit=False)
             booking.dharamshala = shala
             if request.user.is_authenticated:
@@ -151,55 +198,13 @@ def booking(request,slug):
             subject = '[GoJainYatra]Received Booking request for '+str(dharamshala)+'.'
             #mail_body = 'Hello '+str(first_name)+', we received your request for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.'
             to_email = form.cleaned_data.get('email_id')
-            send_mail(subject,
-            get_template('provisional_booking.html').render(
-                {
-                    'first_name': first_name,
-                    'last_name':last_name,
-                    'phone_no':phone_no,
-                    'dharamshala':dharamshala,
-                    'checkin_date':checkin_date,
-                    'checkout_date':checkout_date,
-                    'room_type':room_type,
-                    'no_adults':no_adults,
-                    'no_children':no_children
-                }
-            ),
-            'support@gojainyatra.com',
-            [to_email,],
-            fail_silently=False)
+            dict_context = {'first_name': first_name,'last_name':last_name,'phone_no':phone_no,'dharamshala':dharamshala,'checkin_date':checkin_date,'checkout_date':checkout_date,'room_type':room_type,'no_adults':no_adults,'no_children':no_children}
+            send_mail(subject,get_template('provisional_booking.html').render(dict_context),'support@gojainyatra.com',[to_email,],fail_silently=False)
             subject_dhairya = '[GoJainYatra]Received Booking request for '+str(dharamshala)+' from '+str(first_name)+'.'
             #dhairya_mail = 'Name : '+str(first_name)+' '+str(last_name)+'. Phone no. : '+str(phone_no)+'. Dharamshala : '+str(dharamshala)+'. Checkin date: '+str(checkin_date)+' Checkout date: '+str(checkout_date)+'. Room type : '+str(room_type)
             send_mail(subject_dhairya,
-            get_template('dhairya_provisional_booking.html').render(
-                {
-                    'first_name': first_name,
-                    'last_name':last_name,
-                    'phone_no':phone_no,
-                    'dharamshala':dharamshala,
-                    'checkin_date':checkin_date,
-                    'checkout_date':checkout_date,
-                    'room_type':room_type,
-                    'no_adults':no_adults,
-                    'no_children':no_children
-                }
-            ),
-            'support@gojainyatra.com',
-            ['support@gojainyatra.com','rasilabengangar51@gmail.com','starbooking9@gmail.com',]
-            ,fail_silently=False,
-            html_message=get_template('dhairya_provisional_booking.html').render(
-                {
-                    'first_name': first_name,
-                    'last_name':last_name,
-                    'phone_no':phone_no,
-                    'dharamshala':dharamshala,
-                    'checkin_date':checkin_date,
-                    'checkout_date':checkout_date,
-                    'room_type':room_type,
-                    'no_adults':no_adults,
-                    'no_children':no_children
-                }
-            ),)
+            get_template('dhairya_provisional_booking.html').render(dict_context),'support@gojainyatra.com',['support@gojainyatra.com','rasilabengangar51@gmail.com','starbooking9@gmail.com',],fail_silently=False,
+            html_message=get_template('dhairya_provisional_booking.html').render(dict_context),)
             messages.success(request, 'You have requested for provisional booking at '+str(booking.dharamshala)+'. Our team will shortly contact you. Thank you for using GoJainYatra.')
             if not request.user.is_authenticated:
                 return redirect('home')
@@ -207,6 +212,7 @@ def booking(request,slug):
         
     else:
         form = NewBookingForm()
+        form.fields['room_type'].choices=[(r,r)for r in room_types]
     return render(request,'booking.html',{'shala':shala,'form':form})
 
 @login_required
