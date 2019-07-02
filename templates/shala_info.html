@@ -36,7 +36,11 @@
     <div class="d-flex justify-content-center" id="myline">
       <h2>{{shala.name_with_space}}</h2>
     </div>
-    <div class="d-flex justify-content-center">{{shala.description}} <span><a href='#map' style="color:rgb(7, 176, 233);"> &nbsp; Locate on map </a></span></div>
+    <div class="d-flex justify-content-center">{{shala.description}}
+    </div>
+    <div class="d-flex justify-content-center">
+      <a href='#map' style="color:rgb(7, 176, 233);"> &nbsp; Locate on map </a>
+    </div>
   </div>
   <div class="d-flex justify-content-center" style="padding-top:10px;padding-bottom:10px">
     {% if shala.image1 %}
@@ -435,7 +439,7 @@
   </div>
   <div id = 'map' class="d-flex justify-content-center" style="padding-bottom:20px;">
     {% load easy_maps_tags %}
-    {% easy_map "New Tungarli Road, Opposite Girivihar Hotel, Lonavala, Maharashtra" 800 500 %}
+    {% easy_map shala.address_for_google_map 800 500 %}
   </div>
 {% endblock %}
 
