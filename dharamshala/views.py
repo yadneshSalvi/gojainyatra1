@@ -169,16 +169,16 @@ def booking(request,slug):
             cin = form.cleaned_data.get('checkin_date')
             cout = form.cleaned_data.get('checkout_date')
             if shala.NAfromDate1:
-                if ((shala.NAfromDate1 <=cin and cin<= shala.NAtoDate1) or (shala.NAfromDate1 <cout and cout< shala.NAtoDate1)):
-                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(shala.NAfromDate1)+' to '+str(shala.NAtoDate1)+'. Please select other dates or search for another Dharamshala')
+                if ((shala.NAfromDate1 <=cin and cin<= shala.NAtoDate1) or (shala.NAfromDate1 <cout and cout< shala.NAtoDate1) or (cin<=shala.NAfromDate1 and shala.NAfromDate1<cout)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(localize(shala.NAfromDate1))+' to '+str(localize(shala.NAtoDate1))+'. Please select other dates or search for another Dharamshala')
                     return redirect('booking',slug=shala.name_without_space)
             if shala.NAfromDate2:
-                if ((shala.NAfromDate2 <=cin and cin<= shala.NAtoDate2) or (shala.NAfromDate2 <cout and cout< shala.NAtoDate2)):
-                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(shala.NAfromDate2)+' to '+str(shala.NAtoDate2)+'. Please select other dates or search for another Dharamshala')
+                if ((shala.NAfromDate2 <=cin and cin<= shala.NAtoDate2) or (shala.NAfromDate2 <cout and cout< shala.NAtoDate2) or (cin<=shala.NAfromDate2 and shala.NAfromDate2<cout)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(localize(shala.NAfromDate2))+' to '+str(localize(shala.NAtoDate2))+'. Please select other dates or search for another Dharamshala')
                     return redirect('booking',slug=shala.name_without_space)
             if shala.NAfromDate3:
-                if ((shala.NAfromDate3 <=cin and cin<= shala.NAtoDate3) or (shala.NAfromDate3 <cout and cout< shala.NAtoDate3)):
-                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(shala.NAfromDate3)+' to '+str(shala.NAtoDate3)+'. Please select other dates or search for another Dharamshala')
+                if ((shala.NAfromDate3 <=cin and cin<= shala.NAtoDate3) or (shala.NAfromDate3 <cout and cout< shala.NAtoDate3) or (cin<=shala.NAfromDate3 and shala.NAfromDate3<cout)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(localize(shala.NAfromDate3))+' to '+str(localize(shala.NAtoDate3))+'. Please select other dates or search for another Dharamshala')
                     return redirect('booking',slug=shala.name_without_space)
 
             booking = form.save(commit=False)
