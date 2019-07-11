@@ -281,7 +281,7 @@ def voucher_form(request,first_name,last_name,year,month,day,hour,minute,booking
             no_and_type_of_room = '-'
         checkin_date = str(localize(booking.checkin_date))
         checkout_date = str(localize(booking.checkout_date))
-        total_days_of_stay = int((booking.checkin_date - booking.checkout_date).days)
+        total_days_of_stay = int((booking.checkout_date-booking.checkin_date).days)
         data_dict = {'yatri_name':yatri_name,'today_date':today_date,'type_of_dharamshala_or_bunglow_or_sanatorium':'Dharamshala',
         'name_of_dharamshala_or_bunglow_or_sanatorium':name_dharamshala,'address':address,'yatri_email':yatri_email,
         'yatri_phone':yatri_phone,'no_of_yatris':no_of_yatris,'no_and_type_of_room':no_and_type_of_room,
