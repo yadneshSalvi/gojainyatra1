@@ -134,7 +134,7 @@ class Booking(models.Model):
     phone_no = models.CharField(max_length=10)
     checkin_date = models.DateField(default=timezone.now)
     checkout_date = models.DateField(default=timezone.now)
-    room_type = models.CharField(max_length=100,blank=True,null=True,default="select")
+    room_type = models.CharField(max_length=400,blank=True,null=True,default="select")
     dharamshala = models.ForeignKey(Shala,related_name='bookings',on_delete=models.CASCADE)
     booked_by = models.ForeignKey(User,related_name='bookings',on_delete=models.CASCADE,null=True,blank=True)
     booked_at = models.DateTimeField(default=timezone.now)
