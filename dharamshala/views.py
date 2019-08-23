@@ -180,6 +180,14 @@ def booking(request,slug):
                 if ((shala.NAfromDate3 <=cin and cin<= shala.NAtoDate3) or (shala.NAfromDate3 <cout and cout< shala.NAtoDate3) or (cin<=shala.NAfromDate3 and shala.NAfromDate3<cout)):
                     messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(localize(shala.NAfromDate3))+' to '+str(localize(shala.NAtoDate3))+'. Please select other dates or search for another Dharamshala')
                     return redirect('booking',slug=shala.name_without_space)
+            if shala.NAfromDate4:
+                if ((shala.NAfromDate4 <=cin and cin<= shala.NAtoDate4) or (shala.NAfromDate4 <cout and cout< shala.NAtoDate4) or (cin<=shala.NAfromDate4 and shala.NAfromDate4<cout)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(localize(shala.NAfromDate4))+' to '+str(localize(shala.NAtoDate4))+'. Please select other dates or search for another Dharamshala')
+                    return redirect('booking',slug=shala.name_without_space)
+            if shala.NAfromDate5:
+                if ((shala.NAfromDate5 <=cin and cin<= shala.NAtoDate5) or (shala.NAfromDate5 <cout and cout< shala.NAtoDate5) or (cin<=shala.NAfromDate5 and shala.NAfromDate5<cout)):
+                    messages.error(request,'Sorry booking for this dharamhala is not available between the dates '+str(localize(shala.NAfromDate5))+' to '+str(localize(shala.NAtoDate5))+'. Please select other dates or search for another Dharamshala')
+                    return redirect('booking',slug=shala.name_without_space)
 
             booking = form.save(commit=False)
             booking.dharamshala = shala
@@ -268,7 +276,7 @@ def voucher_form(request,first_name,last_name,year,month,day,hour,minute,booking
         yatri_name = str(booking.First_Name)+' '+str(booking.Last_Name)
         today_date = str(localize(localdate()))
         name_dharamshala = str(booking.dharamshala.name_with_space)
-        address = str(booking.dharamshala.description) 
+        address = str(booking.dharamshala.description) #this is dharamshala address
         yatri_email = str(booking.email_id)
         yatri_phone = str(booking.phone_no)
         if booking.Number_of_children!=0:
@@ -283,7 +291,7 @@ def voucher_form(request,first_name,last_name,year,month,day,hour,minute,booking
         checkout_date = str(localize(booking.checkout_date))
         total_days_of_stay = int((booking.checkout_date-booking.checkin_date).days)
         data_dict = {'yatri_name':yatri_name,'today_date':today_date,'type_of_dharamshala_or_bunglow_or_sanatorium':'Dharamshala',
-        'name_of_dharamshala_or_bunglow_or_sanatorium':name_dharamshala,'address':address,'yatri_email':yatri_email,
+        'name_of_dharamshala_or_bunglow_or_sanatorium':name_dharamshala,'dharamshala_address':address,'yatri_email':yatri_email,
         'yatri_phone':yatri_phone,'no_of_yatris':no_of_yatris,'no_and_type_of_room':no_and_type_of_room,
         'checkin_date':checkin_date,'checkout_date':checkout_date,'total_days_of_stay':total_days_of_stay}
         form = NewVoucherForm(initial=data_dict)
@@ -298,9 +306,13 @@ def voucher_send(request,pk):
 class VoucherUpdateView(UpdateView):
     model = Voucher
     fields = ('yatri_name','today_date','type_of_dharamshala_or_bunglow_or_sanatorium',
-        'name_of_dharamshala_or_bunglow_or_sanatorium','address','phone_of_dharamshala_or_bunglow_or_sanatorium',
-        'yatri_email','yatri_phone','no_of_yatris','no_and_type_of_room','checkin_date','checkout_date',
-        'total_days_of_stay','amount_received','booking_number','bank_ref_no')
+        'name_of_dharamshala_or_bunglow_or_sanatorium','dharamshala_address','phone_of_dharamshala_or_bunglow_or_sanatorium',
+        'email_of_dharamshala_or_bunglow_or_sanatorium','check_in_time_given_by_dharamshala',
+        'check_out_time_given_by_dharamshala',
+        'yatri_email','yatri_phone','yatri_address','no_of_yatris','no_and_type_of_room','checkin_date','checkout_date',
+        'check_in_time_given_by_yatri','check_out_time_given_by_yatri',
+        'total_days_of_stay','amount_received','service_charge','booking_number','bank_ref_no',
+        'gojainyatra_email_id','gojainyatra_phone_no')
     template_name = 'edit_voucher.html'
     pk_url_kwarg = 'voucher_pk'
     context_object_name = 'voucher'

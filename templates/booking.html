@@ -42,10 +42,22 @@
   <div class="container" style="font-family:'Oxygen'; padding-top:10px;">
     <h4>Fill the form below, and a person from Team GoJainYatra will call you on your given mobile number.</h4>
     {% if shala.NAfromDate1 %}
-       <div class="alert alert-danger" role="alert">Booking for this dharamshala is not available for the dates 
-         {{shala.NAfromDate1}} {% if shala.NAtoDate1 %}to {{shala.NAtoDate1}}{%endif%} 
-         {%if shala.NAfromDate2%}and {{shala.NAfromDate2}}{%endif%} {% if shala.NAtoDate2 != shala.NAfromDate2 %}to {{shala.NAtoDate2}}{%endif%} 
-         {%if shala.NAfromDate3%}and {{shala.NAfromDate3}}{%endif%} {% if shala.NAtoDate3 != shala.NAfromDate3 %}to {{shala.NAtoDate3}}{%endif%}
+       <div class="alert alert-danger" role="alert">Booking for this dharamshala is not available for the following dates
+         <ul>
+           <li>{{shala.NAfromDate1}} {% if shala.NAtoDate1 %}to {{shala.NAtoDate1}}{%endif%} </li>
+            {%if shala.NAfromDate2%}
+              <li>{{shala.NAfromDate2}} {% if shala.NAtoDate2 != shala.NAfromDate2 %}to {{shala.NAtoDate2}}{%endif%}</li>
+            {%endif%}
+            {%if shala.NAfromDate3%}
+              <li>{{shala.NAfromDate3}} {% if shala.NAtoDate3 != shala.NAfromDate3 %}to {{shala.NAtoDate3}}{%endif%}</li>
+            {%endif%}
+            {%if shala.NAfromDate4%}
+              <li>{{shala.NAfromDate4}} {% if shala.NAtoDate4 != shala.NAfromDate4 %}to {{shala.NAtoDate4}}{%endif%}</li>
+            {%endif%}
+            {%if shala.NAfromDate5%}
+              <li>{{shala.NAfromDate5}} {% if shala.NAtoDate5 != shala.NAfromDate5 %}to {{shala.NAtoDate5}}{%endif%}</li>
+            {%endif%}
+         </ul> 
        </div>
     {% endif %}
     {% if messages %}

@@ -67,7 +67,7 @@ class Feedback_form(forms.ModelForm):
         fields = ['Feedback','Name']
 
 class NewVoucherForm(forms.ModelForm):
-    address = forms.CharField(
+    dharamshala_address = forms.CharField(
         widget=forms.Textarea(
             attrs={'rows': 3}
         ),
@@ -76,6 +76,10 @@ class NewVoucherForm(forms.ModelForm):
     class Meta:
         model = Voucher
         fields = ['yatri_name','today_date','type_of_dharamshala_or_bunglow_or_sanatorium',
-        'name_of_dharamshala_or_bunglow_or_sanatorium','address','phone_of_dharamshala_or_bunglow_or_sanatorium',
-        'yatri_email','yatri_phone','no_of_yatris','no_and_type_of_room','checkin_date','checkout_date',
-        'total_days_of_stay','amount_received','booking_number','bank_ref_no']
+        'name_of_dharamshala_or_bunglow_or_sanatorium','dharamshala_address','phone_of_dharamshala_or_bunglow_or_sanatorium',
+        'email_of_dharamshala_or_bunglow_or_sanatorium','check_in_time_given_by_dharamshala',
+        'check_out_time_given_by_dharamshala',
+        'yatri_email','yatri_phone','yatri_address','no_of_yatris','no_and_type_of_room','checkin_date','checkout_date',
+        'check_in_time_given_by_yatri','check_out_time_given_by_yatri',
+        'total_days_of_stay','amount_received','service_charge','booking_number','bank_ref_no',
+        'gojainyatra_email_id','gojainyatra_phone_no']

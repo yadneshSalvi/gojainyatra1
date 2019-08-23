@@ -8,8 +8,8 @@
 </div>
 
 <table align="center" style="width:70%;border:1px solid black;">
-    <tr style="background:cornflowerblue;">
-        <th>{{voucher.type_of_dharamshala_or_bunglow_or_sanatorium}} details</th>
+    <tr style="background:rgb(242,242,242);">
+        <th style="color:rgb(217, 48, 36);">{{voucher.type_of_dharamshala_or_bunglow_or_sanatorium}} details</th>
         <th></th>
     </tr>
     <tr style="border-bottom: 1px solid black;">
@@ -18,14 +18,26 @@
     </tr>
     <tr style="border-bottom: 1px solid black;">
         <td>Address :</td>
-        <td>{{voucher.address}}</td> 
+        <td>{{voucher.dharamshala_address}}</td> 
     </tr>
     <tr style="border-bottom: 1px solid black;">
         <td>Phone :</td>
         <td>{{voucher.phone_of_dharamshala_or_bunglow_or_sanatorium}}</td> 
     </tr>
-    <tr style="background:cornflowerblue;">
-        <th>Yatri details</th>
+    <tr style="border-bottom: 1px solid black;">
+        <td>Email :</td>
+        <td>{{voucher.email_of_dharamshala_or_bunglow_or_sanatorium}}</td> 
+    </tr>
+    <tr style="border-bottom: 1px solid black;">
+        <td>Check in time :</td>
+        <td>{{voucher.check_in_time_given_by_dharamshala}}</td> 
+    </tr>
+    <tr style="border-bottom: 1px solid black;">
+        <td>Check out time :</td>
+        <td>{{voucher.check_out_time_given_by_dharamshala}}</td> 
+    </tr>
+    <tr style="background:rgb(242,242,242);">
+        <th style="color:rgb(217, 48, 36);">Yatri details</th>
         <th></th>
     </tr>
     <tr style="border-bottom: 1px solid black;">
@@ -41,11 +53,15 @@
         <td>{{voucher.yatri_phone}}</td> 
     </tr>
     <tr style="border-bottom: 1px solid black;">
+        <td>Address :</td>
+        <td>{{voucher.yatri_address}}</td> 
+    </tr>
+    <tr style="border-bottom: 1px solid black;">
         <td>No of Yatris :</td>
         <td>{{voucher.no_of_yatris}}</td> 
         </tr>
-    <tr style="background:cornflowerblue;">
-        <th>Stay details</th>
+    <tr style="background:rgb(242,242,242);">
+        <th style="color:rgb(217, 48, 36);">Stay details</th>
         <th></th>
     </tr>
     <tr style="border-bottom: 1px solid black;">
@@ -60,24 +76,36 @@
         <td>Checkout Date :</td>
         <td>{{voucher.checkout_date}}</td> 
     </tr>
-    <tr style="background:cornflowerblue;">
-        <th>Payment details</th>
-        <th></th>
-    </tr>
     <tr style="border-bottom: 1px solid black;">
         <td>Total days of stay :</td>
         <td>{{voucher.total_days_of_stay}}</td> 
     </tr>
+    <tr style="background:rgb(242,242,242);">
+        <th style="color:rgb(217, 48, 36);">Payment details</th>
+        <th></th>
+    </tr>  
     <tr style="border-bottom: 1px solid black;">
         <td>Amount Received :</td>
         <td>{{voucher.amount_received}}</td> 
     </tr>
     <tr style="border-bottom: 1px solid black;">
+        <td>Service Charges:</td>
+        <td>{{voucher.service_charge}}</td> 
+    </tr>
+    <tr style="border-bottom: 1px solid black;">
         <td>Booking Number :</td>
         <td>{{voucher.booking_number}}</td> 
     </tr>
+    <tr style="background:rgb(242,242,242);">
+        <th style="color:rgb(217, 48, 36);">GoJainYatra details</th>
+        <th></th>
+    </tr>
     <tr style="border-bottom: 1px solid black;">
-        <td>Bank Ref. No. :</td>
-        <td>{{voucher.bank_ref_no}}</td> 
+        <td>Emai id :</td>
+        <td>{{voucher.gojainyatra_email_id}}</td> 
+    </tr>
+    <tr style="border-bottom: 1px solid black;">
+        <td>Phone no:</td>
+        <td>{{voucher.gojainyatra_phone_no}}</td> 
     </tr>
 </table>

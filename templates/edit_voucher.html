@@ -34,66 +34,98 @@
   </div>
   
   <div class="container">
-    Fill the following form to generate the voucher, in case some data is not available put '-'
-    <form method="post" novalidate style="padding-top:30px;padding-bottom:30px;">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-sm-11 col-md-6">
-                {{form.yatri_name|as_crispy_field}}
+        Fill the following form to generate the voucher, in case some data is not available put '-'
+        <form method="post" novalidate style="padding-top:30px;padding-bottom:30px;">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-11 col-md-6">
+                    {{form.yatri_name|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-6">
+                    {{form.today_date|as_crispy_field}}
+                </div>
             </div>
-            <div class="col-sm-11 col-md-6">
-                {{form.today_date|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-6">
+                    {{form.type_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-6">
+                    {{form.name_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-11 col-md-6">
-                {{form.type_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+            {{form.dharamshala_address|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-6">
+                    {{form.phone_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-6">
+                    {{form.email_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+                </div>
             </div>
-            <div class="col-sm-11 col-md-6">
-                {{form.name_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-6">
+                    {{form.check_in_time_given_by_dharamshala|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-6">
+                    {{form.check_out_time_given_by_dharamshala|as_crispy_field}}
+                </div>
             </div>
-        </div>
-        {{form.address|as_crispy_field}}
-        <div class="row">
-            <div class="col-sm-11 col-md-4">
-                {{form.phone_of_dharamshala_or_bunglow_or_sanatorium|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-6">
+                    {{form.yatri_email|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-6">
+                    {{form.yatri_phone|as_crispy_field}}
+                </div>
             </div>
-            <div class="col-sm-11 col-md-4">
-                {{form.yatri_email|as_crispy_field}}
+            {{form.yatri_address|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-3">
+                    {{form.no_of_yatris|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-3">
+                    {{form.no_and_type_of_room|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-3">
+                    {{form.checkin_date|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-3">
+                    {{form.checkout_date|as_crispy_field}}
+                </div>
             </div>
-            <div class="col-sm-11 col-md-4">
-                {{form.yatri_phone|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-4">
+                    {{form.check_in_time_given_by_yatri|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-4">
+                    {{form.check_out_time_given_by_yatri|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-4">
+                    {{form.total_days_of_stay|as_crispy_field}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-11 col-md-3">
-                {{form.no_of_yatris|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-3">
+                    {{form.amount_received|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-3">
+                    {{form.service_charge|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-3">
+                    {{form.booking_number|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-3">
+                    {{form.bank_ref_no|as_crispy_field}}
+                </div>
             </div>
-            <div class="col-sm-11 col-md-3">
-                {{form.no_and_type_of_room|as_crispy_field}}
+            <div class="row">
+                <div class="col-sm-11 col-md-6">
+                    {{form.gojainyatra_email_id|as_crispy_field}}
+                </div>
+                <div class="col-sm-11 col-md-6">
+                    {{form.gojainyatra_phone_no|as_crispy_field}}
+                </div>
             </div>
-            <div class="col-sm-11 col-md-3">
-                {{form.checkin_date|as_crispy_field}}
-            </div>
-            <div class="col-sm-11 col-md-3">
-                {{form.checkout_date|as_crispy_field}}
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-sm-11 col-md-3">
-                {{form.total_days_of_stay|as_crispy_field}}
-            </div>
-            <div class="col-sm-11 col-md-3">
-                {{form.amount_received|as_crispy_field}}
-            </div>
-            <div class="col-sm-11 col-md-3">
-                {{form.booking_number|as_crispy_field}}
-            </div>
-            <div class="col-sm-11 col-md-3">
-                {{form.bank_ref_no|as_crispy_field}}
-            </div>
-        </div>
         
         <button type="submit" class="btn btn-success" style="margin-top:10px;">Save changes</button>
         <a href="{% url 'voucher_send' voucher.pk %}" 
