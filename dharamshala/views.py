@@ -36,7 +36,7 @@ def search (request):
         queryset = Shala.objects.all()
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(queryset, 7)
+    paginator = Paginator(queryset, 9)
 
     try:
         shalas = paginator.page(page)
